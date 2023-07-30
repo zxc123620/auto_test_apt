@@ -7,13 +7,13 @@ from django import forms
 
 
 class AddModuleForm(forms.Form):
-    project_id = forms.IntegerField()
+    project = forms.IntegerField()
     name = forms.CharField(max_length=50)
-    parent_module_id = forms.IntegerField(required=False)
+    parent_module = forms.IntegerField(required=False)
 
 
 class UpdateModuleForm(forms.Form):
     id = forms.IntegerField()
-    project_id = forms.IntegerField()
+    project = forms.IntegerField()
     name = forms.CharField(max_length=50)
     parent_module = forms.IntegerField(required=False)

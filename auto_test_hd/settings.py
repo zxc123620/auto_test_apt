@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login_app.apps.LoginAppConfig',
     'project_app.apps.ProjectAppConfig',
-    'module_app.apps.ModuleAppConfig'
+    'module_app.apps.ModuleAppConfig',
+    'page_app.apps.PageAppConfig'
 ]
 
 MIDDLEWARE = [
@@ -86,8 +87,8 @@ DATABASES = {
         "NAME": "my_apt",
         "ENGINE": "django.db.backends.mysql",
         "USER": "root",
-        "PASSWORD": "123456",
-        'HOST': 'localhost'
+        "PASSWORD": "root",
+        'HOST': '127.0.0.1'
     }
 }
 

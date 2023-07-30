@@ -11,6 +11,7 @@ from module_app.forms import AddModuleForm, UpdateModuleForm
 from module_app.models import TbModule
 
 from module_app.serializer import TbModuleSerializer
+from project_app.models import TbProject
 
 
 @csrf_exempt
@@ -26,16 +27,18 @@ def add_module(request):
     form = AddModuleForm(json.loads(request.body.decode("utf-8")))
     if form.is_valid():
         pro_obj = TbModule()
-        parent_module_id = form.cleaned_data["parent_module_id"]
+        parent_module_id = form.cleaned_data["parent_module"]
+        project_id = form.cleaned_data["project"]
+        form.cleaned_data["project"] = TbProject.objects.get(pk=project_id)
         if parent_module_id is not None:
-            form.cleaned_data["parent_module_id"] = TbModule.objects.get(pk=parent_module_id)
+            form.cleaned_data["parent_module"] = TbModule.objects.get(pk=parent_module_id)
         for key, value in form.cleaned_data.items():
             setattr(pro_obj, key, value)
         pro_obj.save()
         result = ResTemPlate(Doing.SUCCESS.value, data=1)
     else:
         result = ResTemPlate(FORM.FORM_ERROR.value, message="请求参数有误")
-    return HttpResponse(result.json_str)
+    return HttpResponse(result.json_str, "application/json")
 
 
 @csrf_exempt
@@ -69,7 +72,11 @@ def update_module(request):
     form = UpdateModuleForm(json.loads(request.body.decode("utf-8")))
     if form.is_valid():
         try:
-            module = TbModule.objects.get(pk=form.cleaned_data["module_id"])
+            module = TbModule.objects.get(pk=form.cleaned_data["id"])
+            form.cleaned_data["project"] = TbProject.objects.get(pk=form.cleaned_data["project"])
+            parent_module_id = form.cleaned_data["parent_module"]
+            if parent_module_id is not None:
+                form.cleaned_data["parent_module"] = TbModule.objects.get(pk=form.cleaned_data["parent_module"])
             for key, value in form.cleaned_data.items():
                 setattr(module, key, value)
             module.save()
@@ -79,7 +86,7 @@ def update_module(request):
             result = ResTemPlate(Doing.SUCCESS.value, data="1")
     else:
         result = ResTemPlate(FORM.FORM_ERROR.value, message="请求参数有误")
-    return HttpResponse(result.json_str)
+    return HttpResponse(result.json_str, "application/json")
 
 
 @csrf_exempt
@@ -99,4 +106,4 @@ def del_module(request, module_id):
         print("没有根据module_id找到项目")
     finally:
         result = ResTemPlate(Doing.SUCCESS.value, data=1)
-    return HttpResponse(result.json_str)
+    return HttpResponse(result.json_str, "application/json")
