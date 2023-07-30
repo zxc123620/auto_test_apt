@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 24/07/2023 21:54:15
+ Date: 30/07/2023 22:37:21
 */
 
 SET NAMES utf8mb4;
@@ -379,6 +379,26 @@ INSERT INTO `tb_module` VALUES (2, 6, '测试模块', NULL);
 INSERT INTO `tb_module` VALUES (3, 6, '测试模块2', 2);
 
 -- ----------------------------
+-- Table structure for tb_operate_args
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_operate_args`;
+CREATE TABLE `tb_operate_args`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `operate_id` bigint(0) NULL DEFAULT NULL COMMENT '所属操作id值',
+  `operate_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属操作argname',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `fk_operate_id_to_id`(`operate_id`) USING BTREE,
+  CONSTRAINT `fk_operate_id_to_id` FOREIGN KEY (`operate_id`) REFERENCES `tb_operate_item` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_operate_args
+-- ----------------------------
+INSERT INTO `tb_operate_args` VALUES (1, 1, 'element');
+INSERT INTO `tb_operate_args` VALUES (2, 2, 'element');
+INSERT INTO `tb_operate_args` VALUES (3, 2, 'text');
+
+-- ----------------------------
 -- Table structure for tb_operate_item
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_operate_item`;
@@ -390,13 +410,14 @@ CREATE TABLE `tb_operate_item`  (
   `operate_args` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `page_id` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `page_id`(`page_id`) USING BTREE,
-  CONSTRAINT `tb_operate_item_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `tb_page` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `page_id`(`page_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_operate_item
 -- ----------------------------
+INSERT INTO `tb_operate_item` VALUES (1, 'click', NULL, NULL, 'element', NULL);
+INSERT INTO `tb_operate_item` VALUES (2, 'input', NULL, NULL, 'element,text', NULL);
 
 -- ----------------------------
 -- Table structure for tb_operate_item_element
@@ -431,6 +452,7 @@ CREATE TABLE `tb_page`  (
 -- ----------------------------
 -- Records of tb_page
 -- ----------------------------
+INSERT INTO `tb_page` VALUES (1, 'testPageName', 2);
 
 -- ----------------------------
 -- Table structure for tb_page_function
@@ -456,16 +478,21 @@ DROP TABLE IF EXISTS `tb_page_service`;
 CREATE TABLE `tb_page_service`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `service_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `page_id` bigint(0) NULL DEFAULT NULL,
+  `tb_page_id` bigint(0) NULL DEFAULT NULL,
   `service_method_args` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `page_id`(`page_id`) USING BTREE,
-  CONSTRAINT `tb_page_service_ibfk_1` FOREIGN KEY (`page_id`) REFERENCES `tb_page` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  INDEX `page_id`(`tb_page_id`) USING BTREE,
+  CONSTRAINT `tb_page_service_ibfk_1` FOREIGN KEY (`tb_page_id`) REFERENCES `tb_page` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page_service
 -- ----------------------------
+INSERT INTO `tb_page_service` VALUES (1, '11', 1, '111');
+INSERT INTO `tb_page_service` VALUES (2, '测试操作', 1, NULL);
+INSERT INTO `tb_page_service` VALUES (3, '测试操作', 1, NULL);
+INSERT INTO `tb_page_service` VALUES (4, '测试操作', 1, NULL);
+INSERT INTO `tb_page_service` VALUES (5, '测试操作', 1, NULL);
 
 -- ----------------------------
 -- Table structure for tb_page_service_element_item
@@ -486,6 +513,11 @@ CREATE TABLE `tb_page_service_element_item`  (
 -- ----------------------------
 -- Records of tb_page_service_element_item
 -- ----------------------------
+INSERT INTO `tb_page_service_element_item` VALUES (1, 1, 1, '[\"adf\", \"adf\"]');
+INSERT INTO `tb_page_service_element_item` VALUES (2, 1, 2, NULL);
+INSERT INTO `tb_page_service_element_item` VALUES (3, 1, 1, NULL);
+INSERT INTO `tb_page_service_element_item` VALUES (4, 1, 1, NULL);
+INSERT INTO `tb_page_service_element_item` VALUES (5, 1, 1, NULL);
 
 -- ----------------------------
 -- Table structure for tb_project
@@ -505,6 +537,25 @@ CREATE TABLE `tb_project`  (
 -- Records of tb_project
 -- ----------------------------
 INSERT INTO `tb_project` VALUES (6, '测试项目', '127.0.0.1', 'http://127.0.0.1:6060/', 'root', 'root');
+
+-- ----------------------------
+-- Table structure for tb_service_operate_args
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_service_operate_args`;
+CREATE TABLE `tb_service_operate_args`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `service_operate_id` bigint(0) NULL DEFAULT NULL COMMENT '页面操作项id',
+  `operate_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'args_name',
+  `operate_val` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'args_value',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `service_operate_id`(`service_operate_id`) USING BTREE,
+  CONSTRAINT `tb_service_operate_args_ibfk_1` FOREIGN KEY (`service_operate_id`) REFERENCES `tb_page_service_element_item` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_service_operate_args
+-- ----------------------------
+INSERT INTO `tb_service_operate_args` VALUES (1, 5, 'element', '111');
 
 -- ----------------------------
 -- Table structure for tb_test_cases

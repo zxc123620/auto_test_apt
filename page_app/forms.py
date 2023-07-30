@@ -17,3 +17,9 @@ class AddElementForm(forms.Form):
     locatestyle = forms.IntegerField()
     locate_value = forms.CharField(max_length=200)
     element_name = forms.CharField(max_length=20)
+
+# class PageServiceForm(forms.Form):
+#     service_name = forms.CharField(max_length=50)
+#     page = forms.IntegerField()
+#     service_method_args = forms.CharField(max_length=50)
+#     page_name = forms.CharField(max_length=200)

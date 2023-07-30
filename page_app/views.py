@@ -1,6 +1,7 @@
 import json
 
 from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction
 from django.http import HttpResponse
 
 from django.views.decorators.csrf import csrf_exempt
@@ -10,8 +11,9 @@ from auto_test_hd.res_code import FORM, Doing
 from auto_test_hd.res_template import ResTemPlate
 from module_app.models import TbModule
 from page_app.forms import AddPageForm, AddElementForm
-from page_app.models import TbPage, TbLocatestyle, TbElement
-from page_app.page_serial import TbPageSerializer, TbElementSerializer
+from page_app.models import TbPage, TbLocatestyle, TbElement, TbPageService, TbPageServiceElementItem, \
+    TbServiceOperateArgs
+from page_app.page_serial import TbPageSerializer, TbElementSerializer, TbPageServiceSerializer
 
 
 class PageView:
@@ -142,6 +144,113 @@ class ElementView:
     def del_element(request, element_id):
         """
         删除元素
+        Args:
+            request:
+            element_id:
+        Returns:
+        """
+        try:
+            demo = TbElement.objects.get(pk=element_id)
+            demo.delete()
+        except ObjectDoesNotExist:
+            print("没有根据element_id找到项目")
+        finally:
+            result = ResTemPlate(Doing.SUCCESS.value, data=1)
+        return HttpResponse(result.json_str, "application/json")
+
+
+class PageServiceView:
+    @staticmethod
+    @transaction.atomic
+    @csrf_exempt
+    @require_POST
+    def add_service(request):
+        """
+        添加业务
+        Args:
+            request:
+        Returns:
+
+        """
+        form = json.loads(request.body.decode("utf-8"))
+        """
+        {
+            "service_name": "111",
+            "page": "123",
+            "page_name": "",
+            "operate": [
+                {
+                    "id": "",
+                    "args": [
+                        {
+                            "name" :"",
+                            "value" : ""
+                        }
+                    ]
+                }
+            ]
+        
+        }
+        """
+        # 将页面操作设置并保存
+        page_service = TbPageService()
+        page_service.service_name = form["service_name"]
+        page_service.page_id = form.get("page", None)
+        page_operate_list = form.get("operate", None)
+        page_service.save()
+        # 设置操作项
+        if page_operate_list is not None or page_operate_list != []:
+            for page_operate_item in page_operate_list:
+                """
+                {
+                    "id": "",
+                    "args": [
+                        {
+                            "name" :"",
+                            "value" : ""
+                        }
+                    ]
+                }
+                """
+                service_element = TbPageServiceElementItem()
+                service_element.page_service_id = page_service.id
+                service_element.tb_operate_item_id = page_operate_item.get("id", None)
+                service_element.save()
+                # 设置参数
+                for arg in page_operate_item.get("args"):
+                    service_operate_arg = TbServiceOperateArgs()
+                    service_operate_arg.service_operate_id = service_element.id
+                    service_operate_arg.operate_key = arg.get("name", None)
+                    service_operate_arg.operate_val = arg.get("value", None)
+                    service_operate_arg.save()
+        result = ResTemPlate(Doing.SUCCESS.value, data=1)
+        return HttpResponse(result.json_str, "application/json")
+
+    @staticmethod
+    @csrf_exempt
+    @require_GET
+    def get_service(request):
+        """
+        获取业务操作
+        Args:
+            request:
+        Returns:
+
+        """
+        data = TbPageService.objects.all()
+        if data.exists():
+            serializer = TbPageServiceSerializer(data, many=True)
+            result = ResTemPlate(code=20000, data=serializer.data)
+        else:
+            result = ResTemPlate(code=20000, data=[])
+        return HttpResponse(result.json_str, "application/json")
+
+    @staticmethod
+    @csrf_exempt
+    @require_POST
+    def del_service(request, element_id):
+        """
+        删除业务操作
         Args:
             request:
             element_id:

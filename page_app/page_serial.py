@@ -5,6 +5,8 @@
 # @Author    :zhouxiaochuan
 from rest_framework import serializers
 
+from page_app.models import TbPageServiceElementItem, TbServiceOperateArgs, TbPageService
+
 
 class TbPageSerializer(serializers.Serializer):
     def update(self, instance, validated_data):
@@ -30,3 +32,61 @@ class TbElementSerializer(serializers.Serializer):
     locatestyle_id = serializers.IntegerField()
     locate_value = serializers.CharField()
     element_name = serializers.CharField()
+
+
+class TbServiceOperateArgsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TbServiceOperateArgs
+        fields = ('operate_key', 'operate_val')
+
+
+class TbPageServiceElementItemSerializer(serializers.ModelSerializer):
+    operate_id = serializers.IntegerField(source="id")
+    args = serializers.SerializerMethodField()
+    operate_name = serializers.CharField(source="tb_operate_item.operate_name")
+
+    class Meta:
+        model = TbPageServiceElementItem
+        fields = ("operate_id", "operate_name", "args")
+
+    def get_args(self, obj):
+        args_objs = TbServiceOperateArgs.objects.filter(service_operate_id=obj.id)
+        return TbServiceOperateArgsSerializer(args_objs, many=True).data
+
+
+class TbPageServiceSerializer(serializers.ModelSerializer):
+    # """
+    # [{
+    #     "service_name": "测试操作",
+    #     "page": "1",
+    #     "page_name": "",
+    #     "operate": [
+    #         {
+    #             "id": "1",
+    #             "operate_name" :""
+    #             "args": [
+    #                 {
+    #                     "operate_key" :"element",
+    #                     "operate_val" : "111"
+    #                 }
+    #             ]
+    #         }
+    #     ]
+    # },
+    # {
+    # },
+    # {
+    # }]
+    # """
+    operate_list = serializers.SerializerMethodField()
+    page_name = serializers.CharField(source="tb_page.name")
+    page_id = serializers.CharField(source="tb_page_id")
+
+    def get_operate_list(self, obj):
+        operate_ids = TbPageServiceElementItem.objects.filter(page_service_id=obj.id)
+        return TbPageServiceElementItemSerializer(operate_ids, many=True).data
+
+    class Meta:
+        model = TbPageService
+        # fields = ("id", "service_name", "page_id", "page_name", "operate_list")
+        fields = ("id", "service_name", "page_id", "page_name", "operate_list")
