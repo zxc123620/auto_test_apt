@@ -12,7 +12,7 @@ from auto_test_hd.res_template import ResTemPlate
 from module_app.models import TbModule
 from page_app.forms import AddPageForm, AddElementForm
 from page_app.models import TbPage, TbLocatestyle, TbElement, TbPageService, TbPageServiceElementItem, \
-    TbServiceOperateArgs
+    TbServiceOperateArgs, TbServiceArgs
 from page_app.page_serial import TbPageSerializer, TbElementSerializer, TbPageServiceSerializer
 
 
@@ -178,6 +178,7 @@ class PageServiceView:
             "service_name": "111",
             "page": "123",
             "page_name": "",
+            "args": ["", "", ""]
             "operate": [
                 {
                     "id": "",
@@ -195,23 +196,18 @@ class PageServiceView:
         # 将页面操作设置并保存
         page_service = TbPageService()
         page_service.service_name = form["service_name"]
-        page_service.page_id = form.get("page", None)
+        page_service.tb_page_id = form.get("page", None)
         page_operate_list = form.get("operate", None)
         page_service.save()
+        page_service_args = form["args"]
+        for arg in page_service_args:
+            arg_obj = TbServiceArgs()
+            arg_obj.service_id = page_service.id
+            arg_obj.operate_key = arg
+            arg_obj.save()
         # 设置操作项
         if page_operate_list is not None or page_operate_list != []:
             for page_operate_item in page_operate_list:
-                """
-                {
-                    "id": "",
-                    "args": [
-                        {
-                            "name" :"",
-                            "value" : ""
-                        }
-                    ]
-                }
-                """
                 service_element = TbPageServiceElementItem()
                 service_element.page_service_id = page_service.id
                 service_element.tb_operate_item_id = page_operate_item.get("id", None)

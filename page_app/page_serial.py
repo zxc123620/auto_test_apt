@@ -5,7 +5,7 @@
 # @Author    :zhouxiaochuan
 from rest_framework import serializers
 
-from page_app.models import TbPageServiceElementItem, TbServiceOperateArgs, TbPageService
+from page_app.models import TbPageServiceElementItem, TbServiceOperateArgs, TbPageService, TbServiceArgs
 
 
 class TbPageSerializer(serializers.Serializer):
@@ -81,12 +81,19 @@ class TbPageServiceSerializer(serializers.ModelSerializer):
     operate_list = serializers.SerializerMethodField()
     page_name = serializers.CharField(source="tb_page.name")
     page_id = serializers.CharField(source="tb_page_id")
+    args = serializers.SerializerMethodField()
 
     def get_operate_list(self, obj):
         operate_ids = TbPageServiceElementItem.objects.filter(page_service_id=obj.id)
         return TbPageServiceElementItemSerializer(operate_ids, many=True).data
 
+    def get_args(self, obj):
+        service_id = obj.id
+        values_list = list(TbServiceArgs.objects.filter(service_id=service_id).values_list("operate_key"))
+        values_list = [value[0] for value in values_list]
+        return values_list
+
     class Meta:
         model = TbPageService
         # fields = ("id", "service_name", "page_id", "page_name", "operate_list")
-        fields = ("id", "service_name", "page_id", "page_name", "operate_list")
+        fields = ("id", "service_name", "page_id", 'args', "page_name", "operate_list")

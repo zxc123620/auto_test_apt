@@ -31,16 +31,6 @@ class TbPage(models.Model):
         db_table = 'tb_page'
 
 
-class TbPageFunction(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    function_name = models.CharField(max_length=50, blank=True, null=True)
-    tb_module = models.ForeignKey(TbModule, models.DO_NOTHING, blank=True, null=True)
-
-    class Meta:
-        managed = True
-        db_table = 'tb_page_function'
-
-
 class TbPageService(models.Model):
     id = models.BigAutoField(primary_key=True)
     service_name = models.CharField(max_length=50, blank=True, null=True)
@@ -97,10 +87,20 @@ class TbPageServiceElementItem(models.Model):
 
 
 class TbServiceOperateArgs(models.Model):
-    service_operate = models.ForeignKey(TbPageServiceElementItem, models.DO_NOTHING, blank=True, null=True, db_comment='页面操作项id')
+    service_operate = models.ForeignKey(TbPageServiceElementItem, models.DO_NOTHING, blank=True, null=True,
+                                        db_comment='页面操作项id')
     operate_key = models.CharField(max_length=255, blank=True, null=True, db_comment='args_name')
     operate_val = models.CharField(max_length=255, blank=True, null=True, db_comment='args_value')
 
     class Meta:
         managed = True
         db_table = 'tb_service_operate_args'
+
+
+class TbServiceArgs(models.Model):
+    service = models.ForeignKey(TbPageService, models.DO_NOTHING, blank=True, null=True)
+    operate_key = models.CharField(max_length=20, blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'tb_service_args'
