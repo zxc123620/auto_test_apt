@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 30/07/2023 22:37:21
+ Date: 14/08/2023 20:10:24
 */
 
 SET NAMES utf8mb4;
@@ -266,6 +266,38 @@ CREATE TABLE `tb_assert_operation`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for tb_case_service
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_case_service`;
+CREATE TABLE `tb_case_service`  (
+  `id` int(0) NOT NULL,
+  `service_id` bigint(0) NULL DEFAULT NULL,
+  `case_id` bigint(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_case_service
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for tb_case_service_args
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_case_service_args`;
+CREATE TABLE `tb_case_service_args`  (
+  `id` int(0) NOT NULL,
+  `case_service_id` int(0) NULL DEFAULT NULL,
+  `key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_case_service_args
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for tb_cases_page_services
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_cases_page_services`;
@@ -389,7 +421,7 @@ CREATE TABLE `tb_operate_args`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_operate_id_to_id`(`operate_id`) USING BTREE,
   CONSTRAINT `fk_operate_id_to_id` FOREIGN KEY (`operate_id`) REFERENCES `tb_operate_item` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_operate_args
@@ -411,7 +443,7 @@ CREATE TABLE `tb_operate_item`  (
   `page_id` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `page_id`(`page_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_operate_item
@@ -447,7 +479,7 @@ CREATE TABLE `tb_page`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `module_id`(`module_id`) USING BTREE,
   CONSTRAINT `tb_page_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `tb_module` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page
@@ -465,11 +497,12 @@ CREATE TABLE `tb_page_function`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `tb_module_id`(`tb_module_id`) USING BTREE,
   CONSTRAINT `tb_page_function_ibfk_1` FOREIGN KEY (`tb_module_id`) REFERENCES `tb_module` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page_function
 -- ----------------------------
+INSERT INTO `tb_page_function` VALUES (8, 'test_function', 2);
 
 -- ----------------------------
 -- Table structure for tb_page_service
@@ -482,8 +515,8 @@ CREATE TABLE `tb_page_service`  (
   `service_method_args` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `page_id`(`tb_page_id`) USING BTREE,
-  CONSTRAINT `tb_page_service_ibfk_1` FOREIGN KEY (`tb_page_id`) REFERENCES `tb_page` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  CONSTRAINT `tb_page_service_ibfk_1` FOREIGN KEY (`tb_page_id`) REFERENCES `tb_page` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page_service
@@ -493,6 +526,7 @@ INSERT INTO `tb_page_service` VALUES (2, '测试操作', 1, NULL);
 INSERT INTO `tb_page_service` VALUES (3, '测试操作', 1, NULL);
 INSERT INTO `tb_page_service` VALUES (4, '测试操作', 1, NULL);
 INSERT INTO `tb_page_service` VALUES (5, '测试操作', 1, NULL);
+INSERT INTO `tb_page_service` VALUES (8, '测试操作222', 1, NULL);
 
 -- ----------------------------
 -- Table structure for tb_page_service_element_item
@@ -508,7 +542,7 @@ CREATE TABLE `tb_page_service_element_item`  (
   INDEX `tb_operate_item_id`(`tb_operate_item_id`) USING BTREE,
   CONSTRAINT `tb_page_service_element_item_ibfk_1` FOREIGN KEY (`page_service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_page_service_element_item_ibfk_2` FOREIGN KEY (`tb_operate_item_id`) REFERENCES `tb_operate_item` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page_service_element_item
@@ -518,6 +552,7 @@ INSERT INTO `tb_page_service_element_item` VALUES (2, 1, 2, NULL);
 INSERT INTO `tb_page_service_element_item` VALUES (3, 1, 1, NULL);
 INSERT INTO `tb_page_service_element_item` VALUES (4, 1, 1, NULL);
 INSERT INTO `tb_page_service_element_item` VALUES (5, 1, 1, NULL);
+INSERT INTO `tb_page_service_element_item` VALUES (8, 8, 1, NULL);
 
 -- ----------------------------
 -- Table structure for tb_project
@@ -539,6 +574,26 @@ CREATE TABLE `tb_project`  (
 INSERT INTO `tb_project` VALUES (6, '测试项目', '127.0.0.1', 'http://127.0.0.1:6060/', 'root', 'root');
 
 -- ----------------------------
+-- Table structure for tb_service_args
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_service_args`;
+CREATE TABLE `tb_service_args`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `service_id` bigint(0) NULL DEFAULT NULL,
+  `operate_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `service_id`(`service_id`) USING BTREE,
+  CONSTRAINT `tb_service_args_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_service_args
+-- ----------------------------
+INSERT INTO `tb_service_args` VALUES (7, 8, 'a');
+INSERT INTO `tb_service_args` VALUES (8, 8, 'b');
+INSERT INTO `tb_service_args` VALUES (9, 8, 'c');
+
+-- ----------------------------
 -- Table structure for tb_service_operate_args
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_service_operate_args`;
@@ -550,12 +605,30 @@ CREATE TABLE `tb_service_operate_args`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `service_operate_id`(`service_operate_id`) USING BTREE,
   CONSTRAINT `tb_service_operate_args_ibfk_1` FOREIGN KEY (`service_operate_id`) REFERENCES `tb_page_service_element_item` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_service_operate_args
 -- ----------------------------
 INSERT INTO `tb_service_operate_args` VALUES (1, 5, 'element', '111');
+INSERT INTO `tb_service_operate_args` VALUES (4, 8, 'element', '111');
+
+-- ----------------------------
+-- Table structure for tb_test_args
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_test_args`;
+CREATE TABLE `tb_test_args`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `case_id` int(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_test_args
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for tb_test_cases
@@ -569,11 +642,15 @@ CREATE TABLE `tb_test_cases`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `page_function_id`(`page_function_id`) USING BTREE,
   CONSTRAINT `tb_test_cases_ibfk_1` FOREIGN KEY (`page_function_id`) REFERENCES `tb_page_function` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_test_cases
 -- ----------------------------
+INSERT INTO `tb_test_cases` VALUES (6, 'test_case', 'test_case_description', 8);
+INSERT INTO `tb_test_cases` VALUES (7, 'test_case', 'test_case_description', 8);
+INSERT INTO `tb_test_cases` VALUES (8, 'test_case', 'test_case_description', NULL);
+INSERT INTO `tb_test_cases` VALUES (9, 'test_case', 'test_case_description', 8);
 
 -- ----------------------------
 -- Table structure for tb_user

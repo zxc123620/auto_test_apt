@@ -68,6 +68,7 @@ class FunctionView:
                 serial.save()
         return HttpResponse(result.json_str, "application/json")
 
+
 class CaseView:
     @staticmethod
     @transaction.atomic

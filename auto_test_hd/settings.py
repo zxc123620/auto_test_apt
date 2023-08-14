@@ -88,7 +88,7 @@ DATABASES = {
         "NAME": "my_apt",
         "ENGINE": "django.db.backends.mysql",
         "USER": "root",
-        "PASSWORD": "root",
+        "PASSWORD": "123456",
         'HOST': '127.0.0.1'
     }
 }
