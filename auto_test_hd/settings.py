@@ -31,17 +31,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bootstrap4',
+    'simpleui',
+    'nested_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'login_app.apps.LoginAppConfig',
-    'project_app.apps.ProjectAppConfig',
-    'module_app.apps.ModuleAppConfig',
-    'page_app.apps.PageAppConfig',
-    'test_app.apps.TestAppConfig'
+    'basic_data.apps.BasicDataConfig',
+    'test_execute.apps.TestExecuteConfig'
 ]
 
 MIDDLEWARE = [
@@ -88,7 +88,7 @@ DATABASES = {
         "NAME": "my_apt",
         "ENGINE": "django.db.backends.mysql",
         "USER": "root",
-        "PASSWORD": "123456",
+        "PASSWORD": "root",
         'HOST': '127.0.0.1'
     }
 }
@@ -116,7 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'UTC'
 
@@ -137,3 +138,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:9527'
 ]
+SIMPLEUI_HOME_INFO = False
+SIMPLEUI_ANALYSIS = False
