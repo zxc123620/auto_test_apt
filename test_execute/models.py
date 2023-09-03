@@ -28,6 +28,9 @@ class TbTestCases(models.Model):
         db_table = 'tb_test_cases'
         verbose_name_plural = "用例管理"
 
+    def __str__(self):
+        return self.case_name
+
 
 class TbCaseService(models.Model):
     id = models.AutoField(primary_key=True)
@@ -68,6 +71,9 @@ class TbTask(models.Model):
         db_table = 'tb_task'
         verbose_name_plural = "测试执行"
 
+    def __str__(self):
+        return str([self.id, self.name])
+
 
 class TbVars(models.Model):
     task = models.ForeignKey(TbTask, models.DO_NOTHING, blank=True, null=True)
@@ -81,3 +87,13 @@ class TbVars(models.Model):
 
     def __str__(self):
         return ''
+
+
+class TbTaskCase(models.Model):
+    task = models.ForeignKey(TbTask, models.DO_NOTHING, blank=True, null=True)
+    case = models.ForeignKey(TbTestCases, models.DO_NOTHING, blank=True, null=True, verbose_name="用例")
+
+    class Meta:
+        managed = True
+        db_table = 'tb_task_case'
+        verbose_name_plural = "执行用例"

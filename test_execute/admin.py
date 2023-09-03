@@ -1,10 +1,10 @@
 from django.contrib import admin
-from django.utils.html import format_html
 
 from nested_admin.nested import NestedModelAdmin, NestedTabularInline
 
 from basic_data.models import TbServiceArgs
-from test_execute.models import TbPageFunction, TbTestCases, TbCaseService, TbCaseServiceArgs, TbTask, TbVars
+from test_execute.models import TbPageFunction, TbTestCases, TbCaseService, TbCaseServiceArgs, TbTask, TbVars, \
+    TbTaskCase
 
 
 @admin.register(TbPageFunction)
@@ -43,14 +43,25 @@ class TbVarsAdmin(NestedTabularInline):
     extra = 0
 
 
+class TaskCaseAdmin(NestedTabularInline):
+    model = TbTaskCase
+    extra = 0
+
+
 @admin.register(TbTask)
 class TbTaskAdmin(NestedModelAdmin):
-    list_display = ["name", "description", "execute_btn"]
-    inlines = [TbVarsAdmin]
+    list_display = ["name", "description"]
+    actions = ["execute"]
+    inlines = [TbVarsAdmin, TaskCaseAdmin]
 
-    @admin.display(description='执行')
-    def execute_btn(self, obj):
-        return format_html('<img src="./templates/static/image/execute.svg"></img>')
+    @admin.action(description="执行")
+    def execute(self, request, queryset):
+        task = queryset[0]
+        project_name = task.project.name
+        for task_case in task.tbtaskcase_set.all():
+            test_case = task_case.case  # 用例
+            page_function = test_case.page_function  # 所属功能
+            module = page_function.tb_module  # 所属模块
+            services = test_case.tbcaseservice_set.all()  # 业务
 
-    execute_btn.icon = 'fas fa-audio-description'
-    execute_btn.type = 'primary'
+    execute.type = 'primary'
