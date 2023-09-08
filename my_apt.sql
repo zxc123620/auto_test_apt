@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 本地
+ Source Server         : zxc
  Source Server Type    : MySQL
- Source Server Version : 80030
+ Source Server Version : 80025
  Source Host           : localhost:3306
  Source Schema         : my_apt
 
  Target Server Type    : MySQL
- Target Server Version : 80030
+ Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 01/09/2023 17:29:45
+ Date: 04/09/2023 20:36:53
 */
 
 SET NAMES utf8mb4;
@@ -23,10 +23,10 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `auth_group`;
 CREATE TABLE `auth_group`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `name` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_group
@@ -45,7 +45,7 @@ CREATE TABLE `auth_group_permissions`  (
   INDEX `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm`(`permission_id`) USING BTREE,
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_group_permissions
@@ -57,13 +57,13 @@ CREATE TABLE `auth_group_permissions`  (
 DROP TABLE IF EXISTS `auth_permission`;
 CREATE TABLE `auth_permission`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `content_type_id` int(0) NOT NULL,
-  `codename` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `codename` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `auth_permission_content_type_id_codename_01ab375a_uniq`(`content_type_id`, `codename`) USING BTREE,
   CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 24 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_permission
@@ -99,24 +99,24 @@ INSERT INTO `auth_permission` VALUES (24, 'Can view session', 6, 'view_session')
 DROP TABLE IF EXISTS `auth_user`;
 CREATE TABLE `auth_user`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `password` varchar(128) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `password` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `last_login` datetime(6) NULL DEFAULT NULL,
   `is_superuser` tinyint(1) NOT NULL,
-  `username` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `first_name` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `last_name` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `email` varchar(254) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `username` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `first_name` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `last_name` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(254) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
   `is_active` tinyint(1) NOT NULL,
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user
 -- ----------------------------
-INSERT INTO `auth_user` VALUES (1, 'pbkdf2_sha256$600000$o9LlNjEoPh5tE0eTzTKIUP$2872Z6tK02ssKKbLfahWc5uoxCK4idE4H/Kuf3Kn0j0=', '2023-08-24 07:09:29.719930', 1, 'admin', '', '', '', 1, 1, '2023-08-23 13:49:39.176493');
+INSERT INTO `auth_user` VALUES (1, 'pbkdf2_sha256$600000$o9LlNjEoPh5tE0eTzTKIUP$2872Z6tK02ssKKbLfahWc5uoxCK4idE4H/Kuf3Kn0j0=', '2023-09-03 06:27:48.501153', 1, 'admin', '', '', '', 1, 1, '2023-08-23 13:49:39.176493');
 
 -- ----------------------------
 -- Table structure for auth_user_groups
@@ -131,7 +131,7 @@ CREATE TABLE `auth_user_groups`  (
   INDEX `auth_user_groups_group_id_97559544_fk_auth_group_id`(`group_id`) USING BTREE,
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user_groups
@@ -150,7 +150,7 @@ CREATE TABLE `auth_user_user_permissions`  (
   INDEX `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm`(`permission_id`) USING BTREE,
   CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user_user_permissions
@@ -163,10 +163,10 @@ DROP TABLE IF EXISTS `django_admin_log`;
 CREATE TABLE `django_admin_log`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `action_time` datetime(6) NOT NULL,
-  `object_id` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL,
-  `object_repr` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `object_id` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL,
+  `object_repr` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `action_flag` smallint(0) UNSIGNED NOT NULL,
-  `change_message` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `change_message` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `content_type_id` int(0) NULL DEFAULT NULL,
   `user_id` int(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
@@ -174,7 +174,7 @@ CREATE TABLE `django_admin_log`  (
   INDEX `django_admin_log_user_id_c564eba6_fk_auth_user_id`(`user_id`) USING BTREE,
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 132 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 131 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_admin_log
@@ -310,11 +310,11 @@ INSERT INTO `django_admin_log` VALUES (131, '2023-08-30 13:24:38.500903', '1', '
 DROP TABLE IF EXISTS `django_content_type`;
 CREATE TABLE `django_content_type`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `app_label` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `model` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `app_label` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `model` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `django_content_type_app_label_model_76bd3d3b_uniq`(`app_label`, `model`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_content_type
@@ -340,11 +340,11 @@ INSERT INTO `django_content_type` VALUES (13, 'test_execute', 'tbtestcases');
 DROP TABLE IF EXISTS `django_migrations`;
 CREATE TABLE `django_migrations`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `app` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `app` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -373,12 +373,12 @@ INSERT INTO `django_migrations` VALUES (18, 'sessions', '0001_initial', '2023-07
 -- ----------------------------
 DROP TABLE IF EXISTS `django_session`;
 CREATE TABLE `django_session`  (
-  `session_key` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `session_data` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `session_key` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `session_data` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `expire_date` datetime(6) NOT NULL,
   PRIMARY KEY (`session_key`) USING BTREE,
   INDEX `django_session_expire_date_a5c62663`(`expire_date`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_session
@@ -386,6 +386,7 @@ CREATE TABLE `django_session`  (
 INSERT INTO `django_session` VALUES ('4fdxclj97g4b2u63eyf33tncopcofir6', '.eJzFkk9vgkAQxb8K2bPKIgKut5omPfXoqRgzu7PqWljMLlxq_O5l1CaV1j9pm_Q0ZN6Px7wZdmwBTb1eNF67hUE2YRHrfe5JUK_akoAbsKtqoCpbOyMHhAxOqh88V6iL6Yk9M1iDX7dvZ_E4xjRKE5XyCCXHSAmeiSSRgmM61FrCUooEYhwnEhXyKJUQc4GCQzYUgkxLbRvfer3scmah1DmbBDl7aD-lbW0U1KayAVgMqFU583bo5KzXUkbRE_FL8MES-n5tdIF9KOojUFICT8i5_ZOrmq2_YEIJfV9Vq6PeuOIoh4ClsSFtIVyRQXgEAHF2mWnVEyedBlSuKeU3E_1B4H0v-FHI_ZwIbZCAiPNh12hG7Fcf9-FzZU8k31jTAfm_Ld0O191P3G1EXc8peKMWj1DDBWNlnCr09X80zxsxzkRbslRrKhIiKiOe3mHbPYc8zITtTGEtt67aaFVfvsy39J1Hujt9d22_SNw9SdJtjPZztn8HmoqiOA:1qYoM5:25NG-qmVeDVWfumRSyngqe3RTlMUbeob0lCB6WRhX48', '2023-09-06 13:57:05.790478');
 INSERT INTO `django_session` VALUES ('831zk69opg17pmi04kz42dmlzpd6crx2', '.eJzFkk9vgkAQxb8K2bPKIgKut5omPfXoqRgzu7PqWljMLlxq_O5l1CaV1j9pm_Q0ZN6Px7wZdmwBTb1eNF67hUE2YRHrfe5JUK_akoAbsKtqoCpbOyMHhAxOqh88V6iL6Yk9M1iDX7dvZ_E4xjRKE5XyCCXHSAmeiSSRgmM61FrCUooEYhwnEhXyKJUQc4GCQzYUgkxLbRvfer3scmah1DmbBDl7aD-lbW0U1KayAVgMqFU583bo5KzXUkbRE_FL8MES-n5tdIF9KOojUFICT8i5_ZOrmq2_YEIJfV9Vq6PeuOIoh4ClsSFtIVyRQXgEAHF2mWnVEyedBlSuKeU3E_1B4H0v-FHI_ZwIbZCAiPNh12hG7Fcf9-FzZU8k31jTAfm_Ld0O191P3G1EXc8peKMWj1DDBWNlnCr09X80zxsxzkRbslRrKhIiKiOe3mHbPYc8zITtTGEtt67aaFVfvsy39J1Hujt9d22_SNw9SdJtjPZztn8HmoqiOA:1qYoIB:dQKb0sPIwp8D2XsTB0HCPOHOssDWf1w-VWsq8RHa3FA', '2023-09-06 13:53:03.523064');
 INSERT INTO `django_session` VALUES ('g49k84x1459sorvlkdxhlg1pzcere05x', '.eJzNlktvozAQx79KxDkP8_Crx973uKelisb2kNASqDCsVqry3RcTtA9KEkKRktMIz8zfnt8Y2x_eFupqv60tltvUeE-e7y3_HVOg3zB3DvMK-a5Y6yKvylStXci689r1t8Jg9tzF_iewB7tvsnkoQsN8RjUjvlHE-FoSLilVkhgWICpIlKQQGkGV0Yb4TEFIpJEEeCClEz1gXttG68dH7OVwwNh7WsReHNeUJ9AYLiLSGEZ5a0KGblCB70xEWOwtm_i0qeCUmUC5SGCl01JneHIeXB3WuT9NEqHvJqHBSe8m2brMTr4NmEOabxTYVG8NVLCp1DvssCH1M9W4OYWDMd_HZjSxXZYqEYwu64MaLmAeSsflYi4yxxfnxtQ4r09IMKDNIPDbtVM-L_Wm03U2FngX_ACsp_Losw4HtKXg1BnOgvl3-A1b-xE4T2XR5xwNa0unxvD2A-oy57J4RV2NRd1FPwbtSUT6tGl_wB_6hUykGiOUoXPeDzSQiZMliflyVyu01RZ_oa4r7H6KpM51lRb5-eZeShrf46l0BkBPJdJvIr_aRBYwdxwKEemv067Avo2m3Abfhe5UAn26YkCb00C4iz0Rau697D41WLTjEf_JuAvnqSz6nGV_gA1MJhRErdHtLR8J3Z6wwq2A8Sj8PKd1c9p9iplZQVZdPaa6clgQ8jMFuGf7cCvdq37j3Od79zdkfLNmKPp8364W2muLP3RlcNTRmVU4EbvSxe4Csl1Z1O9XmJ1i7g5tVKF9ZEF_gBxfvONvDPSASg:1qbLlG:r0Vh9dXcsk1FVASuuvJY0FIvHe7i6J86Pu6-6WAr_5c', '2023-09-13 14:01:34.591448');
+INSERT INTO `django_session` VALUES ('h51b1jqa5xio6qe3i6jphojlcnw0stfy', '.eJzNlktvozAQx79KxDkP8_Crx973uKelisb2kNASqDCsVqry3RcTtA9KEkKRktMIz8zfnt8Y2x_eFupqv60tltvUeE-e7y3_HVOg3zB3DvMK-a5Y6yKvylStXci689r1t8Jg9tzF_iewB7tvsnkoQsN8RjUjvlHE-FoSLilVkhgWICpIlKQQGkGV0Yb4TEFIpJEEeCClEz1gXttG68dH7OVwwNh7WsReHNeUJ9AYLiLSGEZ5a0KGblCB70xEWOwtm_i0qeCUmUC5SGCl01JneHIeXB3WuT9NEqHvJqHBSe8m2brMTr4NmEOabxTYVG8NVLCp1DvssCH1M9W4OYWDMd_HZjSxXZYqEYwu64MaLmAeSsflYi4yxxfnxtQ4r09IMKDNIPDbtVM-L_Wm03U2FngX_ACsp_Losw4HtKXg1BnOgvl3-A1b-xE4T2XR5xwNa0unxvD2A-oy57J4RV2NRd1FPwbtSUT6tGl_wB_6hUykGiOUoXPeDzSQiZMliflyVyu01RZ_oa4r7H6KpM51lRb5-eZeShrf46l0BkBPJdJvIr_aRBYwdxwKEemv067Avo2m3Abfhe5UAn26YkCb00C4iz0Rau697D41WLTjEf_JuAvnqSz6nGV_gA1MJhRErdHtLR8J3Z6wwq2A8Sj8PKd1c9p9iplZQVZdPaa6clgQ8jMFuGf7cCvdq37j3Od79zdkfLNmKPp8364W2muLP3RlcNTRmVU4EbvSxe4Csl1Z1O9XmJ1i7g5tVKF9ZEF_gBxfvONvDPSASg:1qciGl:KuYmOTovKrJLVFLfbvU3cL2b-zS5tGtASZDZIv4A0JQ', '2023-09-17 08:15:43.888589');
 INSERT INTO `django_session` VALUES ('i1z98bt1rc1iwz22mup94pzs0m79oawh', '.eJzFkk9vgkAQxb8K2bPKIgKut5omPfXoqRgzu7PqWljMLlxq_O5l1CaV1j9pm_Q0ZN6Px7wZdmwBTb1eNF67hUE2YRHrfe5JUK_akoAbsKtqoCpbOyMHhAxOqh88V6iL6Yk9M1iDX7dvZ_E4xjRKE5XyCCXHSAmeiSSRgmM61FrCUooEYhwnEhXyKJUQc4GCQzYUgkxLbRvfer3scmah1DmbBDl7aD-lbW0U1KayAVgMqFU583bo5KzXUkbRE_FL8MES-n5tdIF9KOojUFICT8i5_ZOrmq2_YEIJfV9Vq6PeuOIoh4ClsSFtIVyRQXgEAHF2mWnVEyedBlSuKeU3E_1B4H0v-FHI_ZwIbZCAiPNh12hG7Fcf9-FzZU8k31jTAfm_Ld0O191P3G1EXc8peKMWj1DDBWNlnCr09X80zxsxzkRbslRrKhIiKiOe3mHbPYc8zITtTGEtt67aaFVfvsy39J1Hujt9d22_SNw9SdJtjPZztn8HmoqiOA:1qYoRK:XyxnwVWE-lVHarrbIAITMlvlaHbxlm6uI0-GlfByj4c', '2023-09-06 14:02:30.205554');
 INSERT INTO `django_session` VALUES ('pdi0nlorozpyy92t7ovseo4hgv1ufnm1', '.eJzFkk9vgkAQxb8K2bPKIgKut5omPfXoqRgzu7PqWljMLlxq_O5l1CaV1j9pm_Q0ZN6Px7wZdmwBTb1eNF67hUE2YRHrfe5JUK_akoAbsKtqoCpbOyMHhAxOqh88V6iL6Yk9M1iDX7dvZ_E4xjRKE5XyCCXHSAmeiSSRgmM61FrCUooEYhwnEhXyKJUQc4GCQzYUgkxLbRvfer3scmah1DmbBDl7aD-lbW0U1KayAVgMqFU583bo5KzXUkbRE_FL8MES-n5tdIF9KOojUFICT8i5_ZOrmq2_YEIJfV9Vq6PeuOIoh4ClsSFtIVyRQXgEAHF2mWnVEyedBlSuKeU3E_1B4H0v-FHI_ZwIbZCAiPNh12hG7Fcf9-FzZU8k31jTAfm_Ld0O191P3G1EXc8peKMWj1DDBWNlnCr09X80zxsxzkRbslRrKhIiKiOe3mHbPYc8zITtTGEtt67aaFVfvsy39J1Hujt9d22_SNw9SdJtjPZztn8HmoqiOA:1qYoKF:l8qOpMtMtVwjfp0AkHLJcM5vRdf14UnTXB2He20iLik', '2023-09-06 13:55:11.968509');
 INSERT INTO `django_session` VALUES ('wf7xq0nccf5h10o1f5ubfc35adxyzr8x', '.eJzNlU2PmzAQhv9K5HMSbMA23mPvPfZUVtHYniTe8rHio5dV_nsxILVlyS6JkDankTyv3_E8Y_AbOUDbnA9tjdXBWfJEGNn-u6bB_MLCJ-wLFKdyb8qiqZzee8l-zNb776XF7Nuo_c_gDPW52y2jJLKCCW4EZVZTy4yiUnGuFbUiRNRw1IpDZBOurbGUCQ0RVVZRkKFS3jTHoq07r59vKSkgx5Q8bVKSpi2XR-iCTGLaBcFlHyKBflED8yGmIiXbTu-6DoadR6g2R9gZV5kMh2Tu-6h9-l2RGJkvwsPB7ybbtsqGXAA2d0WgoXbmYKGBoNGvcMKO1G9nMBjkYO2PpTs67bhLVwjWVG2u5xtYh9Jlu1mLzOXZp9FZn2WUhjPeAkLWn53Ldal3k26zpcBH8QOwvpfHlHU0460SyX2QIlz_ht9wtR-B870sppzjeW_l3QTe_oP6mHNVvqBplqIe1Y9B-y4iU9p8usBmiiUa4j6Y_kuKE9N3kSQ-yDh6X7P2Neuzw8zuIGs-fSokD3uzMJJXGvBP4_xA_csZ-PT1Kf6VLB_dCk3PoFza6HQscs4LTXzlFN6k3pny9AGyU1W2r58wGzRfDm1Ro1NkyXRBXJ7J5Q_3JAnF:1qZ4Sn:WblKBQTac0D8k8T4yYTNmbrOkkPrpkAJAj32Vzwir9I', '2023-09-07 07:09:05.921882');
@@ -480,9 +481,9 @@ INSERT INTO `t_pub_data_option` VALUES ('PUB.YESNO_1', 'PUB.YESNO', '1', '是（
 DROP TABLE IF EXISTS `tb_assert_operation`;
 CREATE TABLE `tb_assert_operation`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `operate_name` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `operate_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_assert_operation
@@ -501,7 +502,7 @@ CREATE TABLE `tb_case_service`  (
   INDEX `service_id`(`service_id`) USING BTREE,
   CONSTRAINT `tb_case_service_ibfk_1` FOREIGN KEY (`case_id`) REFERENCES `tb_test_cases` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `tb_case_service_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_case_service
@@ -517,13 +518,13 @@ DROP TABLE IF EXISTS `tb_case_service_args`;
 CREATE TABLE `tb_case_service_args`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `case_service_id` int(0) NULL DEFAULT NULL,
-  `key` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `value` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `case_service_id`(`case_service_id`) USING BTREE,
   CONSTRAINT `tb_case_service_args_ibfk_1` FOREIGN KEY (`case_service_id`) REFERENCES `tb_case_service` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_case_service_args
@@ -539,14 +540,14 @@ DROP TABLE IF EXISTS `tb_cases_page_services`;
 CREATE TABLE `tb_cases_page_services`  (
   `case_id` bigint(0) NULL DEFAULT NULL,
   `page_service_id` bigint(0) NULL DEFAULT NULL,
-  `service_args` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `service_args` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `case_id`(`case_id`) USING BTREE,
   INDEX `page_service_id`(`page_service_id`) USING BTREE,
   CONSTRAINT `tb_cases_page_services_ibfk_1` FOREIGN KEY (`case_id`) REFERENCES `tb_test_cases` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_cases_page_services_ibfk_2` FOREIGN KEY (`page_service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_cases_page_services
@@ -558,15 +559,15 @@ CREATE TABLE `tb_cases_page_services`  (
 DROP TABLE IF EXISTS `tb_element`;
 CREATE TABLE `tb_element`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `element_name` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `locatestyle` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `locate_value` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `element_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `locatestyle` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `locate_value` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `page_id` bigint(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `locatestyle_id`(`locatestyle`) USING BTREE,
   INDEX `page_id`(`page_id`) USING BTREE,
   CONSTRAINT `tb_element_ibfk_2` FOREIGN KEY (`page_id`) REFERENCES `tb_page` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_element
@@ -586,7 +587,7 @@ CREATE TABLE `tb_expect_operate_assert`  (
   INDEX `operate_item_id`(`operate_item_id`) USING BTREE,
   CONSTRAINT `tb_expect_operate_assert_ibfk_1` FOREIGN KEY (`assert_operate_id`) REFERENCES `tb_assert_operation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_expect_operate_assert_ibfk_2` FOREIGN KEY (`operate_item_id`) REFERENCES `tb_operate_item` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_expect_operate_assert
@@ -598,12 +599,12 @@ CREATE TABLE `tb_expect_operate_assert`  (
 DROP TABLE IF EXISTS `tb_expect_result`;
 CREATE TABLE `tb_expect_result`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `assert_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `assert_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `case_id` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `case_id`(`case_id`) USING BTREE,
   CONSTRAINT `tb_expect_result_ibfk_1` FOREIGN KEY (`case_id`) REFERENCES `tb_test_cases` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_expect_result
@@ -615,9 +616,9 @@ CREATE TABLE `tb_expect_result`  (
 DROP TABLE IF EXISTS `tb_locatestyle`;
 CREATE TABLE `tb_locatestyle`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `name` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `name` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_locatestyle
@@ -630,11 +631,11 @@ DROP TABLE IF EXISTS `tb_module`;
 CREATE TABLE `tb_module`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `project_id` bigint(0) NOT NULL,
-  `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `project_id`(`project_id`) USING BTREE,
   CONSTRAINT `tb_module_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `tb_project` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_module
@@ -647,11 +648,11 @@ INSERT INTO `tb_module` VALUES (4, 6, '登录模块');
 DROP TABLE IF EXISTS `tb_operate_args`;
 CREATE TABLE `tb_operate_args`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `operate_name` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属操作id值',
-  `operate_key` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '所属操作argname',
+  `operate_name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属操作id值',
+  `operate_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属操作argname',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_operate_id_to_id`(`operate_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_operate_args
@@ -666,12 +667,12 @@ INSERT INTO `tb_operate_args` VALUES (3, 'send_key', 'text');
 DROP TABLE IF EXISTS `tb_operate_item`;
 CREATE TABLE `tb_operate_item`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `operate_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `operate_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `service_id` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `page_id`(`service_id`) USING BTREE,
   CONSTRAINT `tb_operate_item_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_operate_item
@@ -693,7 +694,7 @@ CREATE TABLE `tb_operate_item_element`  (
   INDEX `element_id`(`element_id`) USING BTREE,
   CONSTRAINT `tb_operate_item_element_ibfk_1` FOREIGN KEY (`operate_item_id`) REFERENCES `tb_operate_item` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_operate_item_element_ibfk_2` FOREIGN KEY (`element_id`) REFERENCES `tb_element` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_operate_item_element
@@ -705,12 +706,12 @@ CREATE TABLE `tb_operate_item_element`  (
 DROP TABLE IF EXISTS `tb_page`;
 CREATE TABLE `tb_page`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `module_id` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `module_id`(`module_id`) USING BTREE,
   CONSTRAINT `tb_page_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `tb_module` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page
@@ -723,12 +724,12 @@ INSERT INTO `tb_page` VALUES (2, '登录页面', 4);
 DROP TABLE IF EXISTS `tb_page_function`;
 CREATE TABLE `tb_page_function`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `function_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `function_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `tb_module_id` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `tb_module_id`(`tb_module_id`) USING BTREE,
   CONSTRAINT `tb_page_function_ibfk_1` FOREIGN KEY (`tb_module_id`) REFERENCES `tb_module` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page_function
@@ -741,12 +742,12 @@ INSERT INTO `tb_page_function` VALUES (9, '登录功能', 4);
 DROP TABLE IF EXISTS `tb_page_service`;
 CREATE TABLE `tb_page_service`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `service_name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `service_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `tb_page_id` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `page_id`(`tb_page_id`) USING BTREE,
   CONSTRAINT `tb_page_service_ibfk_1` FOREIGN KEY (`tb_page_id`) REFERENCES `tb_page` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page_service
@@ -763,15 +764,15 @@ CREATE TABLE `tb_page_service_element_item`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `page_service_id` bigint(0) NULL DEFAULT NULL,
   `tb_operate_item_id` bigint(0) NULL DEFAULT NULL,
-  `value` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `key` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `value` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `key` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `order` int(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `page_service_id`(`page_service_id`) USING BTREE,
   INDEX `tb_operate_item_id`(`tb_operate_item_id`) USING BTREE,
   CONSTRAINT `tb_page_service_element_item_ibfk_1` FOREIGN KEY (`page_service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_page_service_element_item_ibfk_2` FOREIGN KEY (`tb_operate_item_id`) REFERENCES `tb_operate_item` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page_service_element_item
@@ -783,13 +784,13 @@ CREATE TABLE `tb_page_service_element_item`  (
 DROP TABLE IF EXISTS `tb_project`;
 CREATE TABLE `tb_project`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '名称',
-  `ip_address` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '项目IP地址',
-  `project_url` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '项目路径',
-  `db_username` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '数据库用户名',
-  `db_password` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '数据库密码',
+  `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '名称',
+  `ip_address` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目IP地址',
+  `project_url` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目路径',
+  `db_username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '数据库用户名',
+  `db_password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '数据库密码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_project
@@ -807,7 +808,7 @@ CREATE TABLE `tb_service_args`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `service_id`(`service_id`) USING BTREE,
   CONSTRAINT `tb_service_args_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_service_args
@@ -823,12 +824,12 @@ DROP TABLE IF EXISTS `tb_service_operate_args`;
 CREATE TABLE `tb_service_operate_args`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `operate_id` bigint(0) NULL DEFAULT NULL COMMENT '页面操作项id',
-  `operate_key` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT 'args_name',
-  `operate_val` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT 'args_value',
+  `operate_key` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'args_name',
+  `operate_val` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'args_value',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `service_operate_id`(`operate_id`) USING BTREE,
   CONSTRAINT `tb_service_operate_args_ibfk_1` FOREIGN KEY (`operate_id`) REFERENCES `tb_operate_item` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_service_operate_args
@@ -852,7 +853,7 @@ CREATE TABLE `tb_task`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `project_id`(`project_id`) USING BTREE,
   CONSTRAINT `tb_task_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `tb_project` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_task
@@ -860,17 +861,36 @@ CREATE TABLE `tb_task`  (
 INSERT INTO `tb_task` VALUES (1, '第一次执行', '测试第一次执行', 6);
 
 -- ----------------------------
+-- Table structure for tb_task_case
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_task_case`;
+CREATE TABLE `tb_task_case`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  `task_id` int(0) NULL DEFAULT NULL,
+  `case_id` bigint(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `task_id`(`task_id`) USING BTREE,
+  INDEX `case_id`(`case_id`) USING BTREE,
+  CONSTRAINT `tb_task_case_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tb_task` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `tb_task_case_ibfk_2` FOREIGN KEY (`case_id`) REFERENCES `tb_test_cases` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of tb_task_case
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for tb_test_args
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_test_args`;
 CREATE TABLE `tb_test_args`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `type` varchar(10) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `value` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `value` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `case_id` int(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_test_args
@@ -882,13 +902,13 @@ CREATE TABLE `tb_test_args`  (
 DROP TABLE IF EXISTS `tb_test_cases`;
 CREATE TABLE `tb_test_cases`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `case_name` varchar(30) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `case_description` varchar(200) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `case_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `case_description` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `page_function_id` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `page_function_id`(`page_function_id`) USING BTREE,
   CONSTRAINT `tb_test_cases_ibfk_1` FOREIGN KEY (`page_function_id`) REFERENCES `tb_page_function` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_test_cases
@@ -900,11 +920,11 @@ INSERT INTO `tb_test_cases` VALUES (11, '注册成功', '成功注册用例', 9)
 -- ----------------------------
 DROP TABLE IF EXISTS `tb_user`;
 CREATE TABLE `tb_user`  (
-  `username` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
-  `password` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `id` int(0) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_user
@@ -923,7 +943,7 @@ CREATE TABLE `tb_vars`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `task_id`(`task_id`) USING BTREE,
   CONSTRAINT `tb_vars_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tb_task` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_vars

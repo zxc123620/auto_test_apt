@@ -2,7 +2,7 @@ from django.db import models
 from selenium.webdriver.common.by import By
 from django.contrib import admin
 
-from basic_data.operate import get_choices
+from auto_test_hd.operate import get_choices
 
 
 class TbProject(models.Model):

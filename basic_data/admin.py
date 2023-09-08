@@ -1,9 +1,9 @@
 from django.contrib import admin
 from nested_admin.nested import NestedModelAdmin, NestedTabularInline
 
+from auto_test_hd.operate import get_method_args
 from basic_data.models import TbProject, TbModule, TbOperateItem, TbPageService, TbPage, TbServiceArgs, \
     TbServiceOperateArgs, TbElement
-from basic_data.operate import get_method_args
 
 
 @admin.register(TbProject)

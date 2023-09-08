@@ -3,8 +3,11 @@ from django.contrib import admin
 from nested_admin.nested import NestedModelAdmin, NestedTabularInline
 
 from basic_data.models import TbServiceArgs
+from test_execute.main_service.ui.main import ui_run
+import test_execute.main_service.ui.ui_test as t
 from test_execute.models import TbPageFunction, TbTestCases, TbCaseService, TbCaseServiceArgs, TbTask, TbVars, \
     TbTaskCase
+from test_execute.utils import MyTestCase
 
 
 @admin.register(TbPageFunction)
@@ -58,10 +61,17 @@ class TbTaskAdmin(NestedModelAdmin):
     def execute(self, request, queryset):
         task = queryset[0]
         project_name = task.project.name
+        all_test_case = []
+        global_vars = task.tbvars_set.all()
         for task_case in task.tbtaskcase_set.all():
             test_case = task_case.case  # 用例
             page_function = test_case.page_function  # 所属功能
             module = page_function.tb_module  # 所属模块
-            services = test_case.tbcaseservice_set.all()  # 业务
+            test_case = MyTestCase(project_name=project_name, module_name=module.name,
+                                   function_name=page_function.function_name,
+                                   global_params=global_vars, case=test_case)
+            all_test_case.append(test_case)
+        t.TEST_CASES.extend(all_test_case)
+        ui_run()
 
     execute.type = 'primary'
