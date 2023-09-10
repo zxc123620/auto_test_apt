@@ -5,11 +5,9 @@
 # @Author    :zhouxiaochuan
 # @Description:
 import os
+import time
 
 import pytest
-
-from auto_test_hd.operate import get_methods
-import test_execute.operate.basic
 
 
 def get_project_path():
@@ -18,8 +16,14 @@ def get_project_path():
     return p_path[:p_path.index(p_name) + len(p_name)]
 
 
+result_dir = f"{get_project_path()}/templates/static/test_execute/result/"
+
+
 def ui_run():
-    result_dir = f"{get_project_path()}/templates/result/"
-    report_dir = f"{get_project_path()}/templates/report/"
     pytest.main(["-vs", "--alluredir", result_dir, "--clean-alluredir"])
+
+
+def ui_report():
+    report_dir = f"{get_project_path()}/templates/static/test_execute/report/{time.strftime('%Y-%m-%d-%H:%M:%S')}/"
+    os.mkdir(report_dir)
     os.system(f"allure generate {result_dir} -o {report_dir} --clean")

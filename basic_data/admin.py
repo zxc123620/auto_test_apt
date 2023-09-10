@@ -66,6 +66,7 @@ class PageServiceAdmin(NestedModelAdmin):
     inlines = [PageServiceArgAdmin, OperateAdmin]
 
     def save_model(self, request, obj, form, change):
+        obj.save()
         for operate in obj.tboperateitem_set.all():
             if not operate.tbserviceoperateargs_set.all().exists():
                 operate_name = operate.operate_name

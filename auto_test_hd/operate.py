@@ -28,7 +28,8 @@ def registry_method(desc=None):
         sig = inspect.signature(function)
         method_args = []
         for name, param in sig.parameters.items():
-            method_args.append(name)
+            if name not in ["driver", "kwargs"]:
+                method_args.append(name)
         methods[desc] = {"method_name": function.__name__, "args": method_args, "method": function}
 
         def wrapper(*args, **kwargs):
@@ -47,10 +48,9 @@ def get_choices():
     """
     choices = []
     for desc, other in methods.items():
-        choices.append((other["method_name"], desc))
+        choices.append((desc, desc))
     return choices
 
 
 def get_method_args(method_name):
     return methods[method_name]["args"]
-
