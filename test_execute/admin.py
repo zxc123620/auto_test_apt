@@ -1,4 +1,7 @@
+import time
+
 from django.contrib import admin
+from django.utils.html import format_html
 
 from nested_admin.nested import NestedModelAdmin, NestedTabularInline
 
@@ -80,9 +83,13 @@ class Page:
 
 @admin.register(TbTask)
 class TbTaskAdmin(NestedModelAdmin):
-    list_display = ["name", "description"]
+    list_display = ["name", "description", "result"]
     actions = ["execute"]
     inlines = [TbVarsAdmin, TaskCaseAdmin]
+
+    @admin.display(description="结果")
+    def result(self, obj: TbTask):
+        return format_html(f"<a href='{obj.report_url}' target='_blank'>查看结果<a/>")
 
     @admin.action(description="执行")
     def execute(self, request, queryset):
@@ -100,6 +107,8 @@ class TbTaskAdmin(NestedModelAdmin):
             all_test_case.append(test_case)
         t.TEST_CASES.extend(all_test_case)
         ui_run()
-        ui_report()
-
+        url = f"/static/report/{time.strftime('%Y-%m-%d-%H-%M-%S')}/"
+        ui_report(url)
+        task.report_url = url+"index.html"
+        task.save()
     execute.type = 'primary'

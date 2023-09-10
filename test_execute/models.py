@@ -32,18 +32,10 @@ class TbTestCases(models.Model):
         return self.case_name
 
 
-status_choice = [
-    ("0", "未执行"),
-    ("1", "正在执行"),
-    ("2", "执行完毕")
-]
-
-
 class TbCaseService(models.Model):
     id = models.AutoField(primary_key=True)
     service = models.ForeignKey(TbPageService, on_delete=models.CASCADE, verbose_name="业务", blank=True, null=True)
     case = models.ForeignKey(TbTestCases, on_delete=models.CASCADE, verbose_name="用例", blank=True, null=True)
-    status = models.CharField("状态", choices=status_choice, max_length=10, blank=True, null=True)
 
     class Meta:
         managed = True
@@ -69,10 +61,19 @@ class TbCaseServiceArgs(models.Model):
         return ""
 
 
+status_choice = [
+    ("0", "未执行"),
+    ("1", "正在执行"),
+    ("2", "执行完毕")
+]
+
+
 class TbTask(models.Model):
     name = models.CharField("任务名称", max_length=255, blank=True, null=True)
     description = models.CharField("任务描述", max_length=255, blank=True, null=True)
     project = models.ForeignKey(TbProject, on_delete=models.CASCADE, blank=True, null=True, verbose_name="所属项目")
+    status = models.CharField("状态", choices=status_choice, max_length=10, blank=True, null=True)
+    report_url = models.CharField("项目地址", max_length=255, blank=True, null=True)
 
     class Meta:
         managed = True
