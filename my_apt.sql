@@ -11,7 +11,7 @@
  Target Server Version : 80025
  File Encoding         : 65001
 
- Date: 04/09/2023 20:36:53
+ Date: 10/09/2023 21:52:24
 */
 
 SET NAMES utf8mb4;
@@ -45,7 +45,7 @@ CREATE TABLE `auth_group_permissions`  (
   INDEX `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm`(`permission_id`) USING BTREE,
   CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_group_permissions
@@ -111,7 +111,7 @@ CREATE TABLE `auth_user`  (
   `date_joined` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user
@@ -131,7 +131,7 @@ CREATE TABLE `auth_user_groups`  (
   INDEX `auth_user_groups_group_id_97559544_fk_auth_group_id`(`group_id`) USING BTREE,
   CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user_groups
@@ -150,7 +150,7 @@ CREATE TABLE `auth_user_user_permissions`  (
   INDEX `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm`(`permission_id`) USING BTREE,
   CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of auth_user_user_permissions
@@ -174,7 +174,7 @@ CREATE TABLE `django_admin_log`  (
   INDEX `django_admin_log_user_id_c564eba6_fk_auth_user_id`(`user_id`) USING BTREE,
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 131 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 142 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_admin_log
@@ -303,6 +303,55 @@ INSERT INTO `django_admin_log` VALUES (128, '2023-08-30 13:02:11.814158', '11', 
 INSERT INTO `django_admin_log` VALUES (129, '2023-08-30 13:02:20.271428', '11', 'TbTestCases object (11)', 2, '[]', 13, 1);
 INSERT INTO `django_admin_log` VALUES (130, '2023-08-30 13:24:25.025663', '1', 'TbTask object (1)', 1, '[{\"added\": {}}]', 14, 1);
 INSERT INTO `django_admin_log` VALUES (131, '2023-08-30 13:24:38.500903', '1', 'TbTask object (1)', 2, '[{\"changed\": {\"fields\": [\"\\u4efb\\u52a1\\u63cf\\u8ff0\"]}}]', 14, 1);
+INSERT INTO `django_admin_log` VALUES (132, '2023-09-10 02:24:02.927308', '11', '注册成功', 2, '[{\"changed\": {\"name\": \"tb case service args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u7c7b\\u578b\", \"\\u53c2\\u6570\\u503c\"]}}, {\"changed\": {\"name\": \"tb case service args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u7c7b\\u578b\", \"\\u53c2\\u6570\\u503c\"]}}, {\"changed\": {\"name\": \"tb case service args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u7c7b\\u578b\", \"\\u53c2\\u6570\\u503c\"]}}]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (133, '2023-09-10 02:24:45.157077', '1', '[1, \'第一次执行\']', 3, '', 14, 1);
+INSERT INTO `django_admin_log` VALUES (134, '2023-09-10 02:24:51.452929', '11', '注册成功', 3, '', 13, 1);
+INSERT INTO `django_admin_log` VALUES (135, '2023-09-10 02:24:55.881850', '9', '登录功能', 3, '', 12, 1);
+INSERT INTO `django_admin_log` VALUES (136, '2023-09-10 02:25:03.577186', '35', '测试操作', 3, '', 11, 1);
+INSERT INTO `django_admin_log` VALUES (137, '2023-09-10 02:25:03.580361', '33', '注册操作', 3, '', 11, 1);
+INSERT INTO `django_admin_log` VALUES (138, '2023-09-10 02:25:03.582936', '32', '登录操作', 3, '', 11, 1);
+INSERT INTO `django_admin_log` VALUES (139, '2023-09-10 02:47:45.461547', '4', '登录模块', 3, '', 10, 1);
+INSERT INTO `django_admin_log` VALUES (140, '2023-09-10 02:47:56.954713', '5', '搜索模块', 1, '[{\"added\": {}}]', 10, 1);
+INSERT INTO `django_admin_log` VALUES (141, '2023-09-10 02:49:06.878494', '3', '百度首页', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"tb element\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb element\", \"object\": \"\"}}]', 8, 1);
+INSERT INTO `django_admin_log` VALUES (142, '2023-09-10 03:39:18.227624', '36', '搜索操作', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"TbOperateItem object (32)\"}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (143, '2023-09-10 04:47:36.863486', '36', '搜索操作', 3, '', 11, 1);
+INSERT INTO `django_admin_log` VALUES (144, '2023-09-10 04:48:49.440146', '37', '搜索操作', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"tb service args\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"\"}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (145, '2023-09-10 04:49:20.684420', '37', '搜索操作', 2, '[]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (146, '2023-09-10 04:50:50.954951', '37', '搜索操作', 3, '', 11, 1);
+INSERT INTO `django_admin_log` VALUES (147, '2023-09-10 04:51:10.880182', '38', '搜索操作', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"tb service args\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"\"}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (148, '2023-09-10 04:51:13.873502', '38', '搜索操作', 2, '[]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (149, '2023-09-10 04:51:59.491003', '38', '搜索操作', 3, '', 11, 1);
+INSERT INTO `django_admin_log` VALUES (150, '2023-09-10 04:52:15.262858', '39', '搜索操作', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"tb service args\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"\"}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (151, '2023-09-10 04:52:18.519007', '39', '搜索操作', 2, '[]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (152, '2023-09-10 04:54:06.825328', '39', '搜索操作', 3, '', 11, 1);
+INSERT INTO `django_admin_log` VALUES (153, '2023-09-10 04:54:28.457238', '40', '搜索操作', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"tb service args\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"\"}}, {\"added\": {\"name\": \"tb operate item\", \"object\": \"\"}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (154, '2023-09-10 04:54:31.639618', '40', '搜索操作', 2, '[]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (155, '2023-09-10 04:54:44.920105', '40', '搜索操作', 2, '[]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (156, '2023-09-10 04:55:46.479152', '40', '搜索操作', 2, '[{\"changed\": {\"name\": \"tb service operate args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u503c\"]}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (157, '2023-09-10 05:07:32.326748', '40', '搜索操作', 2, '[{\"changed\": {\"name\": \"tb service operate args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u503c\"]}}, {\"changed\": {\"name\": \"tb service operate args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u503c\"]}}, {\"changed\": {\"name\": \"tb service operate args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u503c\"]}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (158, '2023-09-10 05:54:09.767032', '40', '搜索操作', 2, '[{\"changed\": {\"name\": \"tb service operate args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u503c\"]}}, {\"changed\": {\"name\": \"tb service operate args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u503c\"]}}]', 11, 1);
+INSERT INTO `django_admin_log` VALUES (159, '2023-09-10 05:54:31.790527', '10', '搜索功能', 1, '[{\"added\": {}}]', 12, 1);
+INSERT INTO `django_admin_log` VALUES (160, '2023-09-10 05:55:04.904983', '12', '搜索成功', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"tb case service\", \"object\": \"\"}}]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (161, '2023-09-10 05:55:07.505044', '12', '搜索成功', 2, '[]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (162, '2023-09-10 05:55:17.598643', '12', '搜索成功', 2, '[{\"changed\": {\"name\": \"tb case service args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u7c7b\\u578b\", \"\\u53c2\\u6570\\u503c\"]}}]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (163, '2023-09-10 05:55:37.097522', '2', '[2, \'测试执行\']', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"tb task case\", \"object\": \"TbTaskCase object (1)\"}}]', 14, 1);
+INSERT INTO `django_admin_log` VALUES (164, '2023-09-10 05:55:39.406080', '2', '[2, \'测试执行\']', 2, '[]', 14, 1);
+INSERT INTO `django_admin_log` VALUES (165, '2023-09-10 05:55:46.621640', '2', '[2, \'测试执行\']', 2, '[]', 14, 1);
+INSERT INTO `django_admin_log` VALUES (166, '2023-09-10 05:56:16.207804', '12', '搜索成功', 2, '[]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (167, '2023-09-10 05:56:28.343839', '12', '搜索成功', 2, '[]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (168, '2023-09-10 06:02:36.336191', '12', '搜索成功', 3, '', 13, 1);
+INSERT INTO `django_admin_log` VALUES (169, '2023-09-10 06:02:58.735853', '2', '[2, \'测试执行\']', 3, '', 14, 1);
+INSERT INTO `django_admin_log` VALUES (171, '2023-09-10 06:03:32.076864', '2', '[2, \'测试执行\']', 2, '[{\"deleted\": {\"name\": \"tb task case\", \"object\": \"TbTaskCase object (None)\"}}]', 14, 1);
+INSERT INTO `django_admin_log` VALUES (172, '2023-09-10 06:03:37.907004', '2', '[2, \'测试执行\']', 3, '', 14, 1);
+INSERT INTO `django_admin_log` VALUES (173, '2023-09-10 06:03:42.657968', '12', '搜索成功', 3, '', 13, 1);
+INSERT INTO `django_admin_log` VALUES (174, '2023-09-10 06:03:56.525155', '13', '搜索成功', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"tb case service\", \"object\": \"\"}}]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (175, '2023-09-10 06:04:44.948043', '13', '搜索成功', 2, '[]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (176, '2023-09-10 06:04:48.880838', '13', '搜索成功', 2, '[]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (177, '2023-09-10 06:04:54.167893', '13', '搜索成功', 2, '[{\"changed\": {\"name\": \"tb case service args\", \"object\": \"\", \"fields\": [\"\\u53c2\\u6570\\u7c7b\\u578b\", \"\\u53c2\\u6570\\u503c\"]}}]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (178, '2023-09-10 06:04:56.968795', '13', '搜索成功', 2, '[]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (179, '2023-09-10 07:23:09.364631', '13', '搜索成功', 2, '[]', 13, 1);
+INSERT INTO `django_admin_log` VALUES (180, '2023-09-10 07:23:20.804091', '3', '[3, \'测试执行\']', 1, '[{\"added\": {}}, {\"added\": {\"name\": \"tb task case\", \"object\": \"TbTaskCase object (2)\"}}]', 14, 1);
+INSERT INTO `django_admin_log` VALUES (181, '2023-09-10 07:23:23.052805', '3', '[3, \'测试执行\']', 2, '[]', 14, 1);
 
 -- ----------------------------
 -- Table structure for django_content_type
@@ -314,7 +363,7 @@ CREATE TABLE `django_content_type`  (
   `model` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `django_content_type_app_label_model_76bd3d3b_uniq`(`app_label`, `model`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_content_type
@@ -330,6 +379,7 @@ INSERT INTO `django_content_type` VALUES (11, 'basic_data', 'tbpageservice');
 INSERT INTO `django_content_type` VALUES (7, 'basic_data', 'tbproject');
 INSERT INTO `django_content_type` VALUES (5, 'contenttypes', 'contenttype');
 INSERT INTO `django_content_type` VALUES (6, 'sessions', 'session');
+INSERT INTO `django_content_type` VALUES (15, 'test_execute', 'tbcaseservice');
 INSERT INTO `django_content_type` VALUES (12, 'test_execute', 'tbpagefunction');
 INSERT INTO `django_content_type` VALUES (14, 'test_execute', 'tbtask');
 INSERT INTO `django_content_type` VALUES (13, 'test_execute', 'tbtestcases');
@@ -344,7 +394,7 @@ CREATE TABLE `django_migrations`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of django_migrations
@@ -386,7 +436,7 @@ CREATE TABLE `django_session`  (
 INSERT INTO `django_session` VALUES ('4fdxclj97g4b2u63eyf33tncopcofir6', '.eJzFkk9vgkAQxb8K2bPKIgKut5omPfXoqRgzu7PqWljMLlxq_O5l1CaV1j9pm_Q0ZN6Px7wZdmwBTb1eNF67hUE2YRHrfe5JUK_akoAbsKtqoCpbOyMHhAxOqh88V6iL6Yk9M1iDX7dvZ_E4xjRKE5XyCCXHSAmeiSSRgmM61FrCUooEYhwnEhXyKJUQc4GCQzYUgkxLbRvfer3scmah1DmbBDl7aD-lbW0U1KayAVgMqFU583bo5KzXUkbRE_FL8MES-n5tdIF9KOojUFICT8i5_ZOrmq2_YEIJfV9Vq6PeuOIoh4ClsSFtIVyRQXgEAHF2mWnVEyedBlSuKeU3E_1B4H0v-FHI_ZwIbZCAiPNh12hG7Fcf9-FzZU8k31jTAfm_Ld0O191P3G1EXc8peKMWj1DDBWNlnCr09X80zxsxzkRbslRrKhIiKiOe3mHbPYc8zITtTGEtt67aaFVfvsy39J1Hujt9d22_SNw9SdJtjPZztn8HmoqiOA:1qYoM5:25NG-qmVeDVWfumRSyngqe3RTlMUbeob0lCB6WRhX48', '2023-09-06 13:57:05.790478');
 INSERT INTO `django_session` VALUES ('831zk69opg17pmi04kz42dmlzpd6crx2', '.eJzFkk9vgkAQxb8K2bPKIgKut5omPfXoqRgzu7PqWljMLlxq_O5l1CaV1j9pm_Q0ZN6Px7wZdmwBTb1eNF67hUE2YRHrfe5JUK_akoAbsKtqoCpbOyMHhAxOqh88V6iL6Yk9M1iDX7dvZ_E4xjRKE5XyCCXHSAmeiSSRgmM61FrCUooEYhwnEhXyKJUQc4GCQzYUgkxLbRvfer3scmah1DmbBDl7aD-lbW0U1KayAVgMqFU583bo5KzXUkbRE_FL8MES-n5tdIF9KOojUFICT8i5_ZOrmq2_YEIJfV9Vq6PeuOIoh4ClsSFtIVyRQXgEAHF2mWnVEyedBlSuKeU3E_1B4H0v-FHI_ZwIbZCAiPNh12hG7Fcf9-FzZU8k31jTAfm_Ld0O191P3G1EXc8peKMWj1DDBWNlnCr09X80zxsxzkRbslRrKhIiKiOe3mHbPYc8zITtTGEtt67aaFVfvsy39J1Hujt9d22_SNw9SdJtjPZztn8HmoqiOA:1qYoIB:dQKb0sPIwp8D2XsTB0HCPOHOssDWf1w-VWsq8RHa3FA', '2023-09-06 13:53:03.523064');
 INSERT INTO `django_session` VALUES ('g49k84x1459sorvlkdxhlg1pzcere05x', '.eJzNlktvozAQx79KxDkP8_Crx973uKelisb2kNASqDCsVqry3RcTtA9KEkKRktMIz8zfnt8Y2x_eFupqv60tltvUeE-e7y3_HVOg3zB3DvMK-a5Y6yKvylStXci689r1t8Jg9tzF_iewB7tvsnkoQsN8RjUjvlHE-FoSLilVkhgWICpIlKQQGkGV0Yb4TEFIpJEEeCClEz1gXttG68dH7OVwwNh7WsReHNeUJ9AYLiLSGEZ5a0KGblCB70xEWOwtm_i0qeCUmUC5SGCl01JneHIeXB3WuT9NEqHvJqHBSe8m2brMTr4NmEOabxTYVG8NVLCp1DvssCH1M9W4OYWDMd_HZjSxXZYqEYwu64MaLmAeSsflYi4yxxfnxtQ4r09IMKDNIPDbtVM-L_Wm03U2FngX_ACsp_Losw4HtKXg1BnOgvl3-A1b-xE4T2XR5xwNa0unxvD2A-oy57J4RV2NRd1FPwbtSUT6tGl_wB_6hUykGiOUoXPeDzSQiZMliflyVyu01RZ_oa4r7H6KpM51lRb5-eZeShrf46l0BkBPJdJvIr_aRBYwdxwKEemv067Avo2m3Abfhe5UAn26YkCb00C4iz0Rau697D41WLTjEf_JuAvnqSz6nGV_gA1MJhRErdHtLR8J3Z6wwq2A8Sj8PKd1c9p9iplZQVZdPaa6clgQ8jMFuGf7cCvdq37j3Od79zdkfLNmKPp8364W2muLP3RlcNTRmVU4EbvSxe4Csl1Z1O9XmJ1i7g5tVKF9ZEF_gBxfvONvDPSASg:1qbLlG:r0Vh9dXcsk1FVASuuvJY0FIvHe7i6J86Pu6-6WAr_5c', '2023-09-13 14:01:34.591448');
-INSERT INTO `django_session` VALUES ('h51b1jqa5xio6qe3i6jphojlcnw0stfy', '.eJzNlktvozAQx79KxDkP8_Crx973uKelisb2kNASqDCsVqry3RcTtA9KEkKRktMIz8zfnt8Y2x_eFupqv60tltvUeE-e7y3_HVOg3zB3DvMK-a5Y6yKvylStXci689r1t8Jg9tzF_iewB7tvsnkoQsN8RjUjvlHE-FoSLilVkhgWICpIlKQQGkGV0Yb4TEFIpJEEeCClEz1gXttG68dH7OVwwNh7WsReHNeUJ9AYLiLSGEZ5a0KGblCB70xEWOwtm_i0qeCUmUC5SGCl01JneHIeXB3WuT9NEqHvJqHBSe8m2brMTr4NmEOabxTYVG8NVLCp1DvssCH1M9W4OYWDMd_HZjSxXZYqEYwu64MaLmAeSsflYi4yxxfnxtQ4r09IMKDNIPDbtVM-L_Wm03U2FngX_ACsp_Losw4HtKXg1BnOgvl3-A1b-xE4T2XR5xwNa0unxvD2A-oy57J4RV2NRd1FPwbtSUT6tGl_wB_6hUykGiOUoXPeDzSQiZMliflyVyu01RZ_oa4r7H6KpM51lRb5-eZeShrf46l0BkBPJdJvIr_aRBYwdxwKEemv067Avo2m3Abfhe5UAn26YkCb00C4iz0Rau697D41WLTjEf_JuAvnqSz6nGV_gA1MJhRErdHtLR8J3Z6wwq2A8Sj8PKd1c9p9iplZQVZdPaa6clgQ8jMFuGf7cCvdq37j3Od79zdkfLNmKPp8364W2muLP3RlcNTRmVU4EbvSxe4Csl1Z1O9XmJ1i7g5tVKF9ZEF_gBxfvONvDPSASg:1qciGl:KuYmOTovKrJLVFLfbvU3cL2b-zS5tGtASZDZIv4A0JQ', '2023-09-17 08:15:43.888589');
+INSERT INTO `django_session` VALUES ('h51b1jqa5xio6qe3i6jphojlcnw0stfy', '.eJzNlktvozAQx79KxDkP8_Crx973uKelisb2kNASqDCsVqry3RcTtA9KEkKRktMIz8zfnt8Y2x_eFupqv60tltvUeE-e7y3_HVOg3zB3DvMK-a5Y6yKvylStXci689r1t8Jg9tzF_iewB7tvsnkoQsN8RjUjvlHE-FoSLilVkhgWICpIlKQQGkGV0Yb4TEFIpJEEeCClEz1gXttG68dH7OVwwNh7WsReHNeUJ9AYLiLSGEZ5a0KGblCB70xEWOwtm_i0qeCUmUC5SGCl01JneHIeXB3WuT9NEqHvJqHBSe8m2brMTr4NmEOabxTYVG8NVLCp1DvssCH1M9W4OYWDMd_HZjSxXZYqEYwu64MaLmAeSsflYi4yxxfnxtQ4r09IMKDNIPDbtVM-L_Wm03U2FngX_ACsp_Losw4HtKXg1BnOgvl3-A1b-xE4T2XR5xwNa0unxvD2A-oy57J4RV2NRd1FPwbtSUT6tGl_wB_6hUykGiOUoXPeDzSQiZMliflyVyu01RZ_oa4r7H6KpM51lRb5-eZeShrf46l0BkBPJdJvIr_aRBYwdxwKEemv067Avo2m3Abfhe5UAn26YkCb00C4iz0Rau697D41WLTjEf_JuAvnqSz6nGV_gA1MJhRErdHtLR8J3Z6wwq2A8Sj8PKd1c9p9iplZQVZdPaa6clgQ8jMFuGf7cCvdq37j3Od79zdkfLNmKPp8364W2muLP3RlcNTRmVU4EbvSxe4Csl1Z1O9XmJ1i7g5tVKF9ZEF_gBxfvONvDPSASg:1qfKqD:QzJHskKhuJ2ru0qfrr0oIMvEbBI-3IKZ4ymH6fzJnjI', '2023-09-24 13:51:09.431163');
 INSERT INTO `django_session` VALUES ('i1z98bt1rc1iwz22mup94pzs0m79oawh', '.eJzFkk9vgkAQxb8K2bPKIgKut5omPfXoqRgzu7PqWljMLlxq_O5l1CaV1j9pm_Q0ZN6Px7wZdmwBTb1eNF67hUE2YRHrfe5JUK_akoAbsKtqoCpbOyMHhAxOqh88V6iL6Yk9M1iDX7dvZ_E4xjRKE5XyCCXHSAmeiSSRgmM61FrCUooEYhwnEhXyKJUQc4GCQzYUgkxLbRvfer3scmah1DmbBDl7aD-lbW0U1KayAVgMqFU583bo5KzXUkbRE_FL8MES-n5tdIF9KOojUFICT8i5_ZOrmq2_YEIJfV9Vq6PeuOIoh4ClsSFtIVyRQXgEAHF2mWnVEyedBlSuKeU3E_1B4H0v-FHI_ZwIbZCAiPNh12hG7Fcf9-FzZU8k31jTAfm_Ld0O191P3G1EXc8peKMWj1DDBWNlnCr09X80zxsxzkRbslRrKhIiKiOe3mHbPYc8zITtTGEtt67aaFVfvsy39J1Hujt9d22_SNw9SdJtjPZztn8HmoqiOA:1qYoRK:XyxnwVWE-lVHarrbIAITMlvlaHbxlm6uI0-GlfByj4c', '2023-09-06 14:02:30.205554');
 INSERT INTO `django_session` VALUES ('pdi0nlorozpyy92t7ovseo4hgv1ufnm1', '.eJzFkk9vgkAQxb8K2bPKIgKut5omPfXoqRgzu7PqWljMLlxq_O5l1CaV1j9pm_Q0ZN6Px7wZdmwBTb1eNF67hUE2YRHrfe5JUK_akoAbsKtqoCpbOyMHhAxOqh88V6iL6Yk9M1iDX7dvZ_E4xjRKE5XyCCXHSAmeiSSRgmM61FrCUooEYhwnEhXyKJUQc4GCQzYUgkxLbRvfer3scmah1DmbBDl7aD-lbW0U1KayAVgMqFU583bo5KzXUkbRE_FL8MES-n5tdIF9KOojUFICT8i5_ZOrmq2_YEIJfV9Vq6PeuOIoh4ClsSFtIVyRQXgEAHF2mWnVEyedBlSuKeU3E_1B4H0v-FHI_ZwIbZCAiPNh12hG7Fcf9-FzZU8k31jTAfm_Ld0O191P3G1EXc8peKMWj1DDBWNlnCr09X80zxsxzkRbslRrKhIiKiOe3mHbPYc8zITtTGEtt67aaFVfvsy39J1Hujt9d22_SNw9SdJtjPZztn8HmoqiOA:1qYoKF:l8qOpMtMtVwjfp0AkHLJcM5vRdf14UnTXB2He20iLik', '2023-09-06 13:55:11.968509');
 INSERT INTO `django_session` VALUES ('wf7xq0nccf5h10o1f5ubfc35adxyzr8x', '.eJzNlU2PmzAQhv9K5HMSbMA23mPvPfZUVtHYniTe8rHio5dV_nsxILVlyS6JkDankTyv3_E8Y_AbOUDbnA9tjdXBWfJEGNn-u6bB_MLCJ-wLFKdyb8qiqZzee8l-zNb776XF7Nuo_c_gDPW52y2jJLKCCW4EZVZTy4yiUnGuFbUiRNRw1IpDZBOurbGUCQ0RVVZRkKFS3jTHoq07r59vKSkgx5Q8bVKSpi2XR-iCTGLaBcFlHyKBflED8yGmIiXbTu-6DoadR6g2R9gZV5kMh2Tu-6h9-l2RGJkvwsPB7ybbtsqGXAA2d0WgoXbmYKGBoNGvcMKO1G9nMBjkYO2PpTs67bhLVwjWVG2u5xtYh9Jlu1mLzOXZp9FZn2WUhjPeAkLWn53Ldal3k26zpcBH8QOwvpfHlHU0460SyX2QIlz_ht9wtR-B870sppzjeW_l3QTe_oP6mHNVvqBplqIe1Y9B-y4iU9p8usBmiiUa4j6Y_kuKE9N3kSQ-yDh6X7P2Neuzw8zuIGs-fSokD3uzMJJXGvBP4_xA_csZ-PT1Kf6VLB_dCk3PoFza6HQscs4LTXzlFN6k3pny9AGyU1W2r58wGzRfDm1Ro1NkyXRBXJ7J5Q_3JAnF:1qZ4Sn:WblKBQTac0D8k8T4yYTNmbrOkkPrpkAJAj32Vzwir9I', '2023-09-07 07:09:05.921882');
@@ -502,14 +552,12 @@ CREATE TABLE `tb_case_service`  (
   INDEX `service_id`(`service_id`) USING BTREE,
   CONSTRAINT `tb_case_service_ibfk_1` FOREIGN KEY (`case_id`) REFERENCES `tb_test_cases` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT,
   CONSTRAINT `tb_case_service_ibfk_2` FOREIGN KEY (`service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_case_service
 -- ----------------------------
-INSERT INTO `tb_case_service` VALUES (4, 32, 11);
-INSERT INTO `tb_case_service` VALUES (5, 33, 11);
-INSERT INTO `tb_case_service` VALUES (6, 35, 11);
+INSERT INTO `tb_case_service` VALUES (8, 40, 13);
 
 -- ----------------------------
 -- Table structure for tb_case_service_args
@@ -524,14 +572,12 @@ CREATE TABLE `tb_case_service_args`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `case_service_id`(`case_service_id`) USING BTREE,
   CONSTRAINT `tb_case_service_args_ibfk_1` FOREIGN KEY (`case_service_id`) REFERENCES `tb_case_service` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_case_service_args
 -- ----------------------------
-INSERT INTO `tb_case_service_args` VALUES (1, 4, 'username', NULL, NULL);
-INSERT INTO `tb_case_service_args` VALUES (2, 5, 'username', NULL, NULL);
-INSERT INTO `tb_case_service_args` VALUES (3, 5, 'password', NULL, NULL);
+INSERT INTO `tb_case_service_args` VALUES (11, 8, 'content', 'str', 'python');
 
 -- ----------------------------
 -- Table structure for tb_cases_page_services
@@ -547,7 +593,7 @@ CREATE TABLE `tb_cases_page_services`  (
   INDEX `page_service_id`(`page_service_id`) USING BTREE,
   CONSTRAINT `tb_cases_page_services_ibfk_1` FOREIGN KEY (`case_id`) REFERENCES `tb_test_cases` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_cases_page_services_ibfk_2` FOREIGN KEY (`page_service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_cases_page_services
@@ -567,12 +613,13 @@ CREATE TABLE `tb_element`  (
   INDEX `locatestyle_id`(`locatestyle`) USING BTREE,
   INDEX `page_id`(`page_id`) USING BTREE,
   CONSTRAINT `tb_element_ibfk_2` FOREIGN KEY (`page_id`) REFERENCES `tb_page` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_element
 -- ----------------------------
-INSERT INTO `tb_element` VALUES (1, 'aaa', 'class name', '112312', 2);
+INSERT INTO `tb_element` VALUES (2, '搜索框', 'id', 'kw', 3);
+INSERT INTO `tb_element` VALUES (3, '搜索按钮', 'id', 'su', 3);
 
 -- ----------------------------
 -- Table structure for tb_expect_operate_assert
@@ -587,7 +634,7 @@ CREATE TABLE `tb_expect_operate_assert`  (
   INDEX `operate_item_id`(`operate_item_id`) USING BTREE,
   CONSTRAINT `tb_expect_operate_assert_ibfk_1` FOREIGN KEY (`assert_operate_id`) REFERENCES `tb_assert_operation` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_expect_operate_assert_ibfk_2` FOREIGN KEY (`operate_item_id`) REFERENCES `tb_operate_item` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_expect_operate_assert
@@ -604,7 +651,7 @@ CREATE TABLE `tb_expect_result`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `case_id`(`case_id`) USING BTREE,
   CONSTRAINT `tb_expect_result_ibfk_1` FOREIGN KEY (`case_id`) REFERENCES `tb_test_cases` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_expect_result
@@ -635,12 +682,12 @@ CREATE TABLE `tb_module`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `project_id`(`project_id`) USING BTREE,
   CONSTRAINT `tb_module_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `tb_project` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_module
 -- ----------------------------
-INSERT INTO `tb_module` VALUES (4, 6, '登录模块');
+INSERT INTO `tb_module` VALUES (5, 6, '搜索模块');
 
 -- ----------------------------
 -- Table structure for tb_operate_args
@@ -672,16 +719,14 @@ CREATE TABLE `tb_operate_item`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `page_id`(`service_id`) USING BTREE,
   CONSTRAINT `tb_operate_item_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_operate_item
 -- ----------------------------
-INSERT INTO `tb_operate_item` VALUES (1, 'click', NULL);
-INSERT INTO `tb_operate_item` VALUES (27, 'click', 32);
-INSERT INTO `tb_operate_item` VALUES (28, 'click', 33);
-INSERT INTO `tb_operate_item` VALUES (29, 'send_key', 33);
-INSERT INTO `tb_operate_item` VALUES (31, 'send_key', 35);
+INSERT INTO `tb_operate_item` VALUES (40, '打开浏览器', 40);
+INSERT INTO `tb_operate_item` VALUES (41, '输入操作', 40);
+INSERT INTO `tb_operate_item` VALUES (42, '点击操作', 40);
 
 -- ----------------------------
 -- Table structure for tb_operate_item_element
@@ -711,12 +756,12 @@ CREATE TABLE `tb_page`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `module_id`(`module_id`) USING BTREE,
   CONSTRAINT `tb_page_ibfk_1` FOREIGN KEY (`module_id`) REFERENCES `tb_module` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page
 -- ----------------------------
-INSERT INTO `tb_page` VALUES (2, '登录页面', 4);
+INSERT INTO `tb_page` VALUES (3, '百度首页', 5);
 
 -- ----------------------------
 -- Table structure for tb_page_function
@@ -725,16 +770,16 @@ DROP TABLE IF EXISTS `tb_page_function`;
 CREATE TABLE `tb_page_function`  (
   `id` bigint(0) NOT NULL AUTO_INCREMENT,
   `function_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `tb_module_id` bigint(0) NULL DEFAULT NULL,
+  `tb_page_id` bigint(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
-  INDEX `tb_module_id`(`tb_module_id`) USING BTREE,
-  CONSTRAINT `tb_page_function_ibfk_1` FOREIGN KEY (`tb_module_id`) REFERENCES `tb_module` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  INDEX `tb_module_id`(`tb_page_id`) USING BTREE,
+  CONSTRAINT `tb_page_function_ibfk_1` FOREIGN KEY (`tb_page_id`) REFERENCES `tb_page` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page_function
 -- ----------------------------
-INSERT INTO `tb_page_function` VALUES (9, '登录功能', 4);
+INSERT INTO `tb_page_function` VALUES (10, '搜索功能', 3);
 
 -- ----------------------------
 -- Table structure for tb_page_service
@@ -747,14 +792,12 @@ CREATE TABLE `tb_page_service`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `page_id`(`tb_page_id`) USING BTREE,
   CONSTRAINT `tb_page_service_ibfk_1` FOREIGN KEY (`tb_page_id`) REFERENCES `tb_page` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page_service
 -- ----------------------------
-INSERT INTO `tb_page_service` VALUES (32, '登录操作', 2);
-INSERT INTO `tb_page_service` VALUES (33, '注册操作', 2);
-INSERT INTO `tb_page_service` VALUES (35, '测试操作', NULL);
+INSERT INTO `tb_page_service` VALUES (40, '搜索操作', 3);
 
 -- ----------------------------
 -- Table structure for tb_page_service_element_item
@@ -772,7 +815,7 @@ CREATE TABLE `tb_page_service_element_item`  (
   INDEX `tb_operate_item_id`(`tb_operate_item_id`) USING BTREE,
   CONSTRAINT `tb_page_service_element_item_ibfk_1` FOREIGN KEY (`page_service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_page_service_element_item_ibfk_2` FOREIGN KEY (`tb_operate_item_id`) REFERENCES `tb_operate_item` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_page_service_element_item
@@ -790,7 +833,7 @@ CREATE TABLE `tb_project`  (
   `db_username` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '数据库用户名',
   `db_password` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '数据库密码',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_project
@@ -805,17 +848,16 @@ CREATE TABLE `tb_service_args`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `service_id` bigint(0) NULL DEFAULT NULL,
   `service_key` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `description` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `service_id`(`service_id`) USING BTREE,
   CONSTRAINT `tb_service_args_ibfk_1` FOREIGN KEY (`service_id`) REFERENCES `tb_page_service` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_service_args
 -- ----------------------------
-INSERT INTO `tb_service_args` VALUES (36, 32, 'username');
-INSERT INTO `tb_service_args` VALUES (37, 33, 'username');
-INSERT INTO `tb_service_args` VALUES (38, 33, 'password');
+INSERT INTO `tb_service_args` VALUES (42, 40, 'content', '搜索内容');
 
 -- ----------------------------
 -- Table structure for tb_service_operate_args
@@ -829,17 +871,15 @@ CREATE TABLE `tb_service_operate_args`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `service_operate_id`(`operate_id`) USING BTREE,
   CONSTRAINT `tb_service_operate_args_ibfk_1` FOREIGN KEY (`operate_id`) REFERENCES `tb_operate_item` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 42 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_service_operate_args
 -- ----------------------------
-INSERT INTO `tb_service_operate_args` VALUES (35, 27, 'element', NULL);
-INSERT INTO `tb_service_operate_args` VALUES (36, 28, 'element', NULL);
-INSERT INTO `tb_service_operate_args` VALUES (37, 29, 'element', NULL);
-INSERT INTO `tb_service_operate_args` VALUES (38, 29, 'text', NULL);
-INSERT INTO `tb_service_operate_args` VALUES (41, 31, 'element', NULL);
-INSERT INTO `tb_service_operate_args` VALUES (42, 31, 'text', NULL);
+INSERT INTO `tb_service_operate_args` VALUES (63, 40, 'url', 'https://www.baidu.com/');
+INSERT INTO `tb_service_operate_args` VALUES (64, 41, 'element', '{{el:搜索框}}');
+INSERT INTO `tb_service_operate_args` VALUES (65, 41, 'text', '{{val:content}}');
+INSERT INTO `tb_service_operate_args` VALUES (66, 42, 'element', '{{el:搜索按钮}}');
 
 -- ----------------------------
 -- Table structure for tb_task
@@ -850,15 +890,17 @@ CREATE TABLE `tb_task`  (
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `project_id` bigint(0) NULL DEFAULT NULL,
+  `status` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `report_url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `project_id`(`project_id`) USING BTREE,
   CONSTRAINT `tb_task_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `tb_project` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_task
 -- ----------------------------
-INSERT INTO `tb_task` VALUES (1, '第一次执行', '测试第一次执行', 6);
+INSERT INTO `tb_task` VALUES (3, '测试执行', '测试第一次执行', 6, NULL, '/static/report/2023-09-10-21-50-53/index.html');
 
 -- ----------------------------
 -- Table structure for tb_task_case
@@ -873,11 +915,12 @@ CREATE TABLE `tb_task_case`  (
   INDEX `case_id`(`case_id`) USING BTREE,
   CONSTRAINT `tb_task_case_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tb_task` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `tb_task_case_ibfk_2` FOREIGN KEY (`case_id`) REFERENCES `tb_test_cases` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_task_case
 -- ----------------------------
+INSERT INTO `tb_task_case` VALUES (2, 3, 13);
 
 -- ----------------------------
 -- Table structure for tb_test_args
@@ -908,12 +951,12 @@ CREATE TABLE `tb_test_cases`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `page_function_id`(`page_function_id`) USING BTREE,
   CONSTRAINT `tb_test_cases_ibfk_1` FOREIGN KEY (`page_function_id`) REFERENCES `tb_page_function` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_test_cases
 -- ----------------------------
-INSERT INTO `tb_test_cases` VALUES (11, '注册成功', '成功注册用例', 9);
+INSERT INTO `tb_test_cases` VALUES (13, '搜索成功', '搜索python成功', 10);
 
 -- ----------------------------
 -- Table structure for tb_user
@@ -943,7 +986,7 @@ CREATE TABLE `tb_vars`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `task_id`(`task_id`) USING BTREE,
   CONSTRAINT `tb_vars_ibfk_1` FOREIGN KEY (`task_id`) REFERENCES `tb_task` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tb_vars

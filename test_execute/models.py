@@ -1,12 +1,12 @@
 from django.db import models
 
-from basic_data.models import TbModule, TbPageService, TbProject
+from basic_data.models import TbPageService, TbProject, TbPage
 
 
 class TbPageFunction(models.Model):
     id = models.BigAutoField(primary_key=True)
     function_name = models.CharField("名称", max_length=50, blank=True, null=True)
-    tb_module = models.ForeignKey(TbModule, models.DO_NOTHING, verbose_name="所属模块", blank=True, null=True)
+    tb_page = models.ForeignKey(TbPage, models.CASCADE, verbose_name="所属页面", blank=True, null=True)
 
     class Meta:
         managed = True
@@ -61,10 +61,19 @@ class TbCaseServiceArgs(models.Model):
         return ""
 
 
+status_choice = [
+    ("0", "未执行"),
+    ("1", "正在执行"),
+    ("2", "执行完毕")
+]
+
+
 class TbTask(models.Model):
     name = models.CharField("任务名称", max_length=255, blank=True, null=True)
     description = models.CharField("任务描述", max_length=255, blank=True, null=True)
     project = models.ForeignKey(TbProject, on_delete=models.CASCADE, blank=True, null=True, verbose_name="所属项目")
+    status = models.CharField("状态", choices=status_choice, max_length=10, blank=True, null=True)
+    report_url = models.CharField("项目地址", max_length=255, blank=True, null=True)
 
     class Meta:
         managed = True

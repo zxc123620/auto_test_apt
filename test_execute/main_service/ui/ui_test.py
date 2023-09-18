@@ -16,7 +16,10 @@ TEST_CASES = []
 
 @pytest.fixture(scope="session", autouse=True)
 def driver_start():
-    return webdriver.Chrome()
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    yield driver
+    driver.quit()
 
 
 @pytest.fixture(scope="function", autouse=True)

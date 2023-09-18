@@ -103,6 +103,7 @@ class TbOperateArgs(models.Model):
 
 
 class TbOperateItem(models.Model):
+    import test_execute.operate.basic
     id = models.BigAutoField(primary_key=True)
     operate_name = models.CharField("操作名称", choices=get_choices(), max_length=50, blank=True, null=True)
     # operate_name = models.CharField("操作名称", max_length=50, blank=True, null=True)
@@ -114,7 +115,7 @@ class TbOperateItem(models.Model):
         verbose_name_plural = '操作'
 
     def __str__(self):
-        return ''
+        return ""
 
 
 class TbPageServiceElementItem(models.Model):
@@ -146,8 +147,10 @@ class TbServiceOperateArgs(models.Model):
 
 
 class TbServiceArgs(models.Model):
+    id = models.BigAutoField(primary_key=True)
     service = models.ForeignKey(TbPageService, models.CASCADE, blank=True, null=True)
     service_key = models.CharField("参数", max_length=20, blank=True, null=True)
+    description = models.CharField("描述", max_length=100, blank=True, null=True)
 
     class Meta:
         managed = True
