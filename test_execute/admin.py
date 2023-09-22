@@ -9,7 +9,7 @@ from basic_data.models import TbServiceArgs, TbPage
 from test_execute.main_service.ui.main import ui_run, ui_report
 import test_execute.main_service.ui.ui_test as t
 from test_execute.models import TbPageFunction, TbTestCases, TbCaseService, TbCaseServiceArgs, TbTask, TbVars, \
-    TbTaskCase
+    TbTaskCase, TbExpect
 from test_execute.utils import MyTestCase
 
 
@@ -30,10 +30,15 @@ class TbCaseServiceAdmin(NestedTabularInline):
     inlines = [CaseServiceArgsAdmin]
 
 
+class TbExpectAdmin(NestedTabularInline):
+    model = TbExpect
+    extra = 0
+
+
 @admin.register(TbTestCases)
 class CaseAdmin(NestedModelAdmin):
     list_display = ["case_name", "page_function"]
-    inlines = [TbCaseServiceAdmin]
+    inlines = [TbCaseServiceAdmin, TbExpectAdmin]
 
     def save_model(self, request, obj, form, change):
         obj.save()
@@ -89,6 +94,8 @@ class TbTaskAdmin(NestedModelAdmin):
 
     @admin.display(description="结果")
     def result(self, obj: TbTask):
+        if obj.report_url is None:
+            return None
         return format_html(f"<a href='{obj.report_url}' target='_blank'>查看结果<a/>")
 
     @admin.action(description="执行")
@@ -109,6 +116,7 @@ class TbTaskAdmin(NestedModelAdmin):
         ui_run()
         url = f"/static/report/{time.strftime('%Y-%m-%d-%H-%M-%S')}/"
         ui_report(url)
-        task.report_url = url+"index.html"
+        task.report_url = url + "index.html"
         task.save()
+
     execute.type = 'primary'

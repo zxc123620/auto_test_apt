@@ -106,3 +106,28 @@ class TbTaskCase(models.Model):
         managed = True
         db_table = 'tb_task_case'
         verbose_name_plural = "执行用例"
+
+
+class TbAssertOption(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    operate_name = models.CharField("断言名称", blank=True, null=True, max_length=255)
+    operate = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'tb_assert_operation'
+
+    def __str__(self):
+        return self.operate_name
+
+
+class TbExpect(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    assert_operate = models.ForeignKey(TbAssertOption, on_delete=models.CASCADE)
+    expect = models.CharField("预期", max_length=255, blank=True, null=True)
+    actual = models.CharField("实际", max_length=255, blank=True, null=True)
+    description = models.CharField("描述", max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'tb_expect_operate_assert'

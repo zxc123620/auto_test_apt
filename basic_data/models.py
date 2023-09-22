@@ -77,7 +77,7 @@ class TbElement(models.Model):
     id = models.BigAutoField(primary_key=True)
     element_name = models.CharField("元素名称", max_length=20, blank=True, null=True)
     locatestyle = models.CharField('定位方式', choices=locate_type, max_length=10, blank=True, null=True)
-    locate_value = models.CharField("定位值", max_length=200, blank=True, null=True)
+    locate_value = models.CharField("定位值", max_length=255, blank=True, null=True)
     page = models.ForeignKey(TbPage, models.CASCADE, null=True)
 
     class Meta:
