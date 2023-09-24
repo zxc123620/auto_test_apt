@@ -3,7 +3,7 @@ from nested_admin.nested import NestedModelAdmin, NestedTabularInline
 
 from auto_test_hd.operate import get_method_args
 from basic_data.models import TbProject, TbModule, TbOperateItem, TbPageService, TbPage, TbServiceArgs, \
-    TbServiceOperateArgs, TbElement
+    TbServiceOperateArgs, TbElement, TbServiceOperateReturn
 
 
 @admin.register(TbProject)
@@ -40,6 +40,11 @@ class PageServiceArgAdmin(NestedTabularInline):
     #         return super().get_readonly_fields(request, obj)
 
 
+class ServiceOperateReturnAdmin(NestedTabularInline):
+    model = TbServiceOperateReturn
+    extra = 0
+
+
 class ServiceOperateArgsAdmin(NestedTabularInline):
     model = TbServiceOperateArgs
     extra = 0
@@ -57,7 +62,7 @@ class OperateAdmin(NestedTabularInline):
     model = TbOperateItem
     extra = 0
     list_display = ["operate_name"]
-    inlines = [ServiceOperateArgsAdmin]
+    inlines = [ServiceOperateArgsAdmin, ServiceOperateReturnAdmin]
 
 
 @admin.register(TbPageService)

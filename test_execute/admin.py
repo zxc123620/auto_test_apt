@@ -91,6 +91,7 @@ class TbTaskAdmin(NestedModelAdmin):
     list_display = ["name", "description", "result"]
     actions = ["execute"]
     inlines = [TbVarsAdmin, TaskCaseAdmin]
+    readonly_fields = ["report_url"]
 
     @admin.display(description="结果")
     def result(self, obj: TbTask):
@@ -101,6 +102,7 @@ class TbTaskAdmin(NestedModelAdmin):
     @admin.action(description="执行")
     def execute(self, request, queryset):
         task = queryset[0]
+        t.TEST_CASES.clear()
         project_name = task.project.name
         all_test_case = []
         global_vars = {vars_obj.key: vars_obj.value for vars_obj in task.tbvars_set.all()}

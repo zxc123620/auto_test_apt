@@ -9,6 +9,7 @@ import pytest
 from selenium import webdriver
 
 from auto_test_hd.operate import get_methods
+from test_execute.main_service.ui.validater import VALIDATE_MAPPING
 from test_execute.utils import MyTestCase
 
 TEST_CASES = []
@@ -41,5 +42,17 @@ def test_ui_execute(test_case: MyTestCase, test_setup_and_teardown):
     global_methods = get_methods()
     for service in test_case.services:
         for method in service.methods:
-            global_methods.get(method.method_name).get("method")(driver=driver, **method.params)
+            result = global_methods.get(method.method_name).get("method")(driver=driver, **method.params)
+            if method.result_key is not None:
+                test_case.result[method.result_key] = result
+
     # 断言操作
+    for assert_item in test_case.assert_operation:
+        print(f"进行断言操作:{assert_item.description}")  # 打印是哪一项操作
+        expect = assert_item.expect
+        actual = assert_item.actual
+        temp_actual = test_case.result.get(actual, None)
+        print(f"temp_actual: {temp_actual}")
+        actual = temp_actual if temp_actual is not None else actual
+        operate_key = assert_item.assert_operate.operate_key
+        VALIDATE_MAPPING.get(str(operate_key))(expect, actual)

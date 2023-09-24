@@ -103,7 +103,7 @@ class TbOperateArgs(models.Model):
 
 
 class TbOperateItem(models.Model):
-    import test_execute.operate.basic
+    import test_execute.operate.operate_test
     id = models.BigAutoField(primary_key=True)
     operate_name = models.CharField("操作名称", choices=get_choices(), max_length=50, blank=True, null=True)
     # operate_name = models.CharField("操作名称", max_length=50, blank=True, null=True)
@@ -141,6 +141,20 @@ class TbServiceOperateArgs(models.Model):
         managed = True
         db_table = 'tb_service_operate_args'
         verbose_name_plural = '操作参数设置'
+
+    def __str__(self):
+        return ""
+
+
+class TbServiceOperateReturn(models.Model):
+    id = models.AutoField(primary_key=True)
+    operate = models.ForeignKey(TbOperateItem, models.CASCADE, blank=True, null=True)
+    result_key = models.CharField("保存的键", max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'tb_operate_result'
+        verbose_name_plural = '结果保存设置'
 
     def __str__(self):
         return ""

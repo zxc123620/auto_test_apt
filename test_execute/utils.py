@@ -19,6 +19,8 @@ class MyTestCase:
         self.test_case_name = case.case_name
         self.test_description = case.case_description
         self.services = self.get_services(case, global_params=global_params)
+        self.assert_operation = case.tbexpect_set.all()  # 验证项目
+        self.result = {}  # 操作执行完成后返回值保存的位置
 
     def get_services(self, test_case: TbTestCases, global_params: dict):
         """
@@ -70,6 +72,9 @@ class Service:
         for operate_obj in all_operate_objs:
             params = {}
             operate_method_name = operate_obj.operate_name  # 执行方法名称
+            result_obj = operate_obj.tbserviceoperatereturn_set.all()  # 方法执行完成后返回值保存的key
+            result_key = result_obj[0].result_key if result_obj.exists() else None
+            # if result_key is not None: self.case.result[result_key] = None
             for param_obj in operate_obj.tbserviceoperateargs_set.all():  # 该方法所有参数
                 arg_name = param_obj.operate_key
                 arg_value = param_obj.operate_val
@@ -84,8 +89,7 @@ class Service:
                     elif arg_ref_type == "el":
                         arg_value = self.case.page.element_locates[arg_ref_name]
                 params[arg_name] = arg_value
-            methods.append(Method(method_name=operate_method_name, params=params))
-            # service_data.methods.append(Method(method_name=operate_method_name, params=params))
+            methods.append(Method(method_name=operate_method_name, params=params, result_key=result_key))
         return methods
 
     def __str__(self):
@@ -93,9 +97,10 @@ class Service:
 
 
 class Method:
-    def __init__(self, method_name, params: dict):
+    def __init__(self, method_name, params: dict, result_key):
         self.method_name = method_name
         self.params = params
+        self.result_key = result_key
 
     def __str__(self):
         return str(self.__dict__)

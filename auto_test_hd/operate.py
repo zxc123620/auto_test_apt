@@ -5,6 +5,7 @@
 # @Author    :zhouxiaochuan
 # @Description: 
 import inspect
+import time
 
 methods = {}
 
@@ -49,6 +50,7 @@ def get_choices():
     choices = []
     for desc, other in methods.items():
         choices.append((desc, desc))
+    print(f"choices:{choices}")
     return choices
 
 

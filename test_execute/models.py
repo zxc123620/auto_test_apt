@@ -49,7 +49,7 @@ class TbCaseService(models.Model):
 class TbCaseServiceArgs(models.Model):
     case_service = models.ForeignKey(TbCaseService, on_delete=models.CASCADE, blank=True, null=True)
     key = models.CharField("参数名", max_length=255, blank=True, null=True)
-    type = models.CharField("参数类型", max_length=255, blank=True, null=True)
+    # type = models.CharField("参数类型", max_length=255, blank=True, null=True)
     value = models.CharField("参数值", max_length=255, blank=True, null=True)
 
     class Meta:
@@ -73,7 +73,7 @@ class TbTask(models.Model):
     description = models.CharField("任务描述", max_length=255, blank=True, null=True)
     project = models.ForeignKey(TbProject, on_delete=models.CASCADE, blank=True, null=True, verbose_name="所属项目")
     status = models.CharField("状态", choices=status_choice, max_length=10, blank=True, null=True)
-    report_url = models.CharField("项目地址", max_length=255, blank=True, null=True)
+    report_url = models.CharField("测试报告地址", max_length=255, blank=True, null=True)
 
     class Meta:
         managed = True
@@ -107,11 +107,14 @@ class TbTaskCase(models.Model):
         db_table = 'tb_task_case'
         verbose_name_plural = "执行用例"
 
+    def __str__(self):
+        return ""
+
 
 class TbAssertOption(models.Model):
     id = models.BigAutoField(primary_key=True)
     operate_name = models.CharField("断言名称", blank=True, null=True, max_length=255)
-    operate = models.IntegerField(blank=True, null=True)
+    operate_key = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = True
@@ -123,11 +126,16 @@ class TbAssertOption(models.Model):
 
 class TbExpect(models.Model):
     id = models.BigAutoField(primary_key=True)
-    assert_operate = models.ForeignKey(TbAssertOption, on_delete=models.CASCADE)
-    expect = models.CharField("预期", max_length=255, blank=True, null=True)
-    actual = models.CharField("实际", max_length=255, blank=True, null=True)
-    description = models.CharField("描述", max_length=255, blank=True, null=True)
+    case = models.ForeignKey(TbTestCases, on_delete=models.CASCADE, blank=True, null=True, verbose_name="所属用例")
+    expect = models.CharField("用例预期结果", max_length=255, blank=True, null=True)
+    assert_operate = models.ForeignKey(TbAssertOption, on_delete=models.CASCADE, verbose_name="验证方式")
+    actual = models.CharField("页面实际结果", max_length=255, blank=True, null=True)
+    description = models.CharField("验证项描述", max_length=255, blank=True, null=True)
 
     class Meta:
         managed = True
         db_table = 'tb_expect_operate_assert'
+        verbose_name_plural = "验证项"
+
+    def __str__(self):
+        return ""
